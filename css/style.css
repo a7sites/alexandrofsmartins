@@ -130,9 +130,24 @@ header .btn_falecomigo button:hover{
 
 h1{
    font-family: var(--fonte-padrao);
+   text-transform: uppercase;
    font-size: 30px;
    margin-top: 50px;
    color: var(--claro);
+}
+
+h2.title_page{
+   font-family: var(--fonte-padrao);
+   text-transform: uppercase;
+   color: var(--claro);
+   font-size: 38px;
+   text-align: center;
+   padding: 40px 0 40px 0;
+}
+
+h2.title_page span{
+   color: var(--secondaria);
+   font-weight: 700;
 }
 
 .p-personal{
@@ -154,19 +169,6 @@ h1{
                radial-gradient(circle at 90% 80%, var(--secondaria) 0%, transparent 20%);
 }
 
-.sobre{
-   padding: 20px 4%;
-}
-
-.title-section{
-   font-family: var(--fonte-padrao);
-   font-size: 30px;
-   color: var(--claro);
-   display: flex;
-   justify-content: center;
-   padding: 0 0 30px 0;
-}
-
 .caixa_desc{
    padding: 30px;
    max-width: 600px;
@@ -185,6 +187,58 @@ h1{
    line-height: 20px;
    text-align: justify;
    color: var(--claro);
+}
+
+.especialidades{
+   padding: 20px 4%; 
+}
+
+.especialidades .flex{
+   gap: 50px;
+}
+
+.flex{
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.card_box{
+   color: var(--claro);
+   padding: 30px;
+   justify-content: center;
+   text-align: center;
+   border-radius: 15px;
+   transition: 0.5s ease;
+}
+
+.card_box:hover{
+   transform: scale(1.05);
+   box-shadow: 0px 5px 10px rgba(243, 243, 243, 0.3);
+   transition: .5s ease;
+
+}
+
+.card_box i{
+   font-size: 80px;
+   color: var(--secondaria);
+   margin-bottom: 20px;
+   color: var(--primaria);
+}
+
+.card_box h3{
+   font-family: var(--fonte-padrao);
+   font-size: 32px;
+   font-weight: 500;
+   margin-bottom: 10px;
+   padding: 20px 0 20px 0;
+}
+
+.card_box p{
+   font-family: var(--fonte-padrao);
+   font-size: 18px;
+   color: var(--claro);
+   font-weight: 300;
 }
 
 @keyframes flutuar {
