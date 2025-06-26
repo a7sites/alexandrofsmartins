@@ -15,6 +15,27 @@
 
 }
 
+/* Animações */
+@keyframes flutuar {
+   0%, 100% {
+      transform: translateY(0);
+   }
+   50% {
+      transform: translateY(-20px);
+   }
+
+}
+
+@keyframes flutuar_left {
+   0%, 100% {
+      transform: translateX(0);
+   }
+   50% {
+      transform: translateX(-40px);
+   }
+
+}
+
 /* Estilo Geral */
 
 html {
@@ -23,7 +44,7 @@ html {
 
 body {
    position: relative;
-   background-image: url('../imgs/bg.jpg');    
+   background-image: url('../imgs/bg.webp');    
    background-size: cover;                  
    background-position: center;            
    background-repeat: no-repeat;           
@@ -56,14 +77,15 @@ body * {
 .logomarca{
    position: relative;
    display: flex;
-   max-width: 150px;
-      animation: flutuar 5s ease-in-out infinite;
+   max-width: 180px;
+   animation: flutuar_left 5s ease-in-out infinite;
 }
 
 header{
    padding: 40px 4%;
    position: fixed;
-   background: rgba(15, 23, 42, 0.8);
+   background: rgba(15, 0, 20, 0.712);
+   backdrop-filter: blur(10px);
    width: 100%;
    z-index: 100;
    top: 0;
@@ -79,7 +101,7 @@ header > .interface{
 header a{
    color: var(--links);
    font-family: var(--fonte-padrao);
-   font-weight: 500;
+   font-weight: 400;
    font-size: 18px;
    text-decoration: none;
    display: inline-block;
@@ -197,8 +219,8 @@ h2.title_page span{
    margin: 0 auto;
    border-radius: 15px;
    border: 1px solid var(--vidro);
+   background: rgba(15, 0, 20, 0.712);
    backdrop-filter: blur(10px);
-   background: rgba(255, 255, 255, 0.1);
 
 }
 
@@ -239,7 +261,8 @@ h2.title_page span{
    transform: scale(1.05);
    box-shadow: 0px 5px 10px rgba(243, 243, 243, 0.3);
    transition: .5s ease;
-   background: rgba(19, 17, 17, 0.925);
+   background: rgba(15, 0, 20, 0.712);
+   backdrop-filter: blur(10px);
 }
 
 .card_box i{
@@ -269,8 +292,8 @@ h2.title_page span{
    margin: 0 auto;
    border-radius: 15px;
    border: 1px solid var(--vidro);
+   background: rgba(15, 0, 20, 0.712);
    backdrop-filter: blur(10px);
-   background: rgba(255, 255, 255, 0.1);
    padding: 30px;
 
 }
@@ -320,12 +343,3 @@ h2.title_page span{
    box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
 }
 
-@keyframes flutuar {
-   0%, 100% {
-      transform: translateY(0);
-   }
-   50% {
-      transform: translateY(-20px);
-   }
-
-}
