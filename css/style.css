@@ -76,6 +76,21 @@ header .menu_header ul li{
    padding: 0 20px;
 }
 
+header .menu_header ul li a::before{
+   content: ' ';
+   height: 3px;
+   width: 0;
+   position: absolute;
+   bottom: -5px;
+   left: 0;
+   background: linear-gradient(90deg, var(--primaria), var(--secondaria));
+}
+
+header .menu_header ul li a:hover::before{
+   width: 100%;
+   transition: width .5s ease;
+}
+
 header .btn_falecomigo button{
    padding: 10px 40px;
    font-size: 18px;
