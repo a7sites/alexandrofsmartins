@@ -1,0 +1,52 @@
+@keyframes bounceInLeft {
+   0% {
+      opacity: 0;
+      transform: translateX(-100vw);
+   }
+   60% {
+      opacity: 1;
+      transform: translateX(30px);
+   }
+   80% {
+      transform: translateX(-10px);
+   }
+   100% {
+      opacity: 1; /* garante visibilidade */
+      transform: translateX(0);
+   }
+}
+
+.menu_header {
+   opacity: 0;
+}
+
+.menu_header.bounce-in {
+   animation: bounceInLeft 1.8s ease-out forwards;
+}
+
+@keyframes bounceInRight {
+   0% {
+      opacity: 0;
+      transform: translateX(100vw); /* Começa fora da tela à direita */
+   }
+   60% {
+      opacity: 1;
+      transform: translateX(-30px);
+   }
+   80% {
+      transform: translateX(10px);
+   }
+   100% {
+      opacity: 1;
+      transform: translateX(0);
+   }
+}
+
+.btn_falecomigo {
+   opacity: 0;
+}
+
+.btn_falecomigo.bounce-in {
+   animation: bounceInRight 1s ease-out forwards; /* Ajuste a duração como quiser */
+   opacity: 1;
+}

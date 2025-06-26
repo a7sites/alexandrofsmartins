@@ -6,6 +6,7 @@
    <title>Alexandro Martins</title>
 
    <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="css/efects.css">
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
@@ -14,6 +15,7 @@
 
 </head>
 <body>
+
    <div class="particulas"></div>
    <header>
       <div class="interface">
@@ -25,8 +27,8 @@
          <div class="menu_header">
             <ul>
                <li><a href="#inicio">Principal</a></li>
-               <li><a href="#especialidades">Especialidades</a></li>
-               <li><a href="#sobremim">Sobre Mim</a></li>
+               <li><a href="#especialidades" id="linkEspecialidades">Especialidades</a></li>
+               <li><a href="#sobremim" id="linkSobre">Sobre Mim</a></li>
                <li><a href="#">Meu GitHub</a></li>
                <li><a href="#">Projetos</a></li>
             </ul>
@@ -92,6 +94,9 @@
          <h2 class="title_page">Fale <span>Comigo</span></h2>
          
          <form class="form_whatsapp" id="formulario" onSubmit="enviarWhatsapp(event)">
+
+            <div id="erroMensagem" class="erro-popup">Erro ao enviar sua mensagem. Todos os campos precisam ser preenchidos.</div>
+
             <div class="grupo_form">
                <input placeholder="Seu Nome" id="nome" class="campo_form">
             </div>
