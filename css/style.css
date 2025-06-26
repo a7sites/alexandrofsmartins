@@ -188,7 +188,7 @@ h2.title_page{
    color: var(--claro);
    font-size: 38px;
    text-align: center;
-   padding: 40px 0 40px 0;
+   padding: 40px 0 100px 0;
 }
 
 h2.title_page span{
@@ -213,6 +213,61 @@ h2.title_page span{
    opacity: 0.5;
    background: radial-gradient(circle at 10% 20%, var(--primaria) 0%, transparent 20%),
                radial-gradient(circle at 90% 80%, var(--secondaria) 0%, transparent 20%);
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.sobre,
+.especialidades {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.falecomigo {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+/* Define largura e centraliza a interface */
+.falecomigo .interface {
+  width: 600px;
+  margin: 0 auto;
+}
+
+
+.sobre.hidden,
+.especialidades.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  animation: fadeOut 0.1s forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 
 .caixa_desc{
@@ -241,6 +296,12 @@ h2.title_page span{
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+}
+
+.especialidades.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .especialidades .flex{
