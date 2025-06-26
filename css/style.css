@@ -57,6 +57,7 @@ header a{
    color: var(--links);
    font-family: var(--fonte-padrao);
    font-weight: 500;
+   font-size: 18px;
    text-decoration: none;
    display: inline-block;
    transition: .2s ease;
@@ -100,6 +101,7 @@ header .btn_falecomigo button{
    border: 0;
    border-radius: 30px;
    cursor: pointer;
+   transition: .5s ease;
 }
 
 header .btn_falecomigo button:hover{
