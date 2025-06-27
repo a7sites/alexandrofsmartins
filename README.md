@@ -121,6 +121,39 @@ Para atualizar o sistema:
 3. Mantenha o arquivo `usuarios.json` existente
 4. Teste todas as funcionalidades
 
+## 🆕 Novas Funcionalidades (2024)
+
+### 📱 Registros de Contatos WhatsApp
+
+- Painel administrativo exibe todos os contatos enviados pelo formulário do site.
+- Tabela com nome, WhatsApp (com máscara), data/hora, último contato, e ações.
+- Botões para chamar no WhatsApp, editar e excluir contatos.
+- Tooltip mostra o tempo do último contato.
+- Edição e exclusão de contatos com feedback visual e atualização dinâmica.
+- Permite múltiplos registros com o mesmo WhatsApp.
+
+### 🔄 Integração Total com o Site
+
+- Formulário do site envia nome, WhatsApp e mensagem via AJAX para o painel.
+- Dados salvos em `whatsapp.json` e exibidos em tempo real no painel.
+- Máscara de telefone brasileira aplicada no front-end e back-end.
+- Timezone configurável para datas corretas.
+
+### 🎨 Visual Moderno e UX
+
+- Menu lateral dinâmico, com ordem e ícones personalizáveis.
+- Menu "Registros" sempre visível, logo abaixo de "Meu Perfil".
+- Alertas de sucesso/erro integrados ao painel, com sumiço automático.
+- Modal de confirmação customizado para exclusão de contatos.
+- Inputs de redes sociais padronizados visualmente.
+- Responsividade aprimorada em todas as telas.
+
+### ⚙️ Configurações Avançadas
+
+- Edição visual dos menus do painel (nome, ícone, ordem).
+- Personalização de cores e modo encolhido da barra lateral.
+- Seletor visual de ícones Bootstrap.
+
 ---
 
-**Desenvolvido com segurança e boas práticas** 🔒
+**Desenvolvido com segurança, integração e experiência moderna!** 🚀
