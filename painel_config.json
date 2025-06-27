@@ -1,0 +1,48 @@
+{
+    "titulo": "Painel A7 Sites",
+    "sidebar_color": "#260a3d",
+    "shrink_sidebar": true,
+    "timezone": "America\/Sao_Paulo",
+    "menus": [
+        {
+            "id": "dashboard",
+            "nome": "Dashboard",
+            "icone": "fas fa-home"
+        },
+        {
+            "id": "perfil",
+            "nome": "Meu Perfil",
+            "icone": "fas fa-user"
+        },
+        {
+            "id": "editar_site",
+            "nome": "Editar Site",
+            "icone": "fas fa-edit"
+        },
+        {
+            "id": "cadastrar",
+            "nome": "Cadastrar Usu\u00e1rio",
+            "icone": "fas fa-user-plus"
+        },
+        {
+            "id": "usuarios",
+            "nome": "Ver Usu\u00e1rios",
+            "icone": "fas fa-users"
+        },
+        {
+            "id": "ver_site",
+            "nome": "Ver Site",
+            "icone": "bi-browser-chrome"
+        },
+        {
+            "id": "configuracoes",
+            "nome": "Configura\u00e7\u00f5es",
+            "icone": "fas fa-cog"
+        },
+        {
+            "id": "sair",
+            "nome": "Sair",
+            "icone": "fas fa-sign-out-alt"
+        }
+    ]
+}

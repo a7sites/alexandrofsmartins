@@ -1,0 +1,32 @@
+[
+    {
+        "titulo": "Cria\u00e7\u00e3o de Sites",
+        "descricao": "Especialista em cria\u00e7\u00e3o de sites modernos, responsivos e otimizados para resultados. Transformo ideias em solu\u00e7\u00f5es digitais com design atrativo, performance, seguran\u00e7a e foco na experi\u00eancia do usu\u00e1rio.",
+        "icone": "bi-code-slash",
+        "cor_icone": "#48429fff",
+        "cor_gradiente": "#81efaaff",
+        "usar_gradiente": false,
+        "cor_fundo": "#0000004a",
+        "usar_blur": true
+    },
+    {
+        "titulo": "Designer",
+        "descricao": "Designer criativo e detalhista, com foco em identidade visual, est\u00e9tica funcional e comunica\u00e7\u00e3o impactante. Transformo conceitos em visuais \u00fanicos que conectam marcas ao seu p\u00fablico.",
+        "icone": "bi-pencil-square",
+        "cor_icone": "#48429fff",
+        "cor_gradiente": "#6e6aa6ff",
+        "usar_gradiente": false,
+        "cor_fundo": "#0000004a",
+        "usar_blur": true
+    },
+    {
+        "titulo": "WordPress",
+        "descricao": "Designer especializado em WordPress, unindo criatividade e funcionalidade para criar sites visualmente marcantes, responsivos e f\u00e1ceis de gerenciar. Transformo ideias em experi\u00eancias digitais intuitivas e profissionais.",
+        "icone": "bi-wordpress",
+        "cor_icone": "#7c3aedff",
+        "cor_gradiente": "#4f46e5ff",
+        "usar_gradiente": false,
+        "cor_fundo": "#0000004a",
+        "usar_blur": false
+    }
+]

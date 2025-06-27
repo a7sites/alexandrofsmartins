@@ -1,0 +1,28 @@
+{
+    "titulo": "Alexandro F. S. Martins",
+    "logomarca": "imgs\/a7site.svg",
+    "menu": [
+        {
+            "nome": "Home",
+            "link": "#inicio"
+        },
+        {
+            "nome": "Especialidades",
+            "link": "#especialidades"
+        },
+        {
+            "nome": "Sobre Mim",
+            "link": "#sobremim"
+        },
+        {
+            "nome": "Meu GitHub",
+            "link": "https:\/\/github.com\/a7sites"
+        },
+        {
+            "nome": "Projetos",
+            "link": "#"
+        }
+    ],
+    "sobre_conteudo": "<p>Ol\u00e1! Seja bem vindo, meu nome \u00e9 Alexandro Martins, sou um desenvolvedor Front End apaixonado por criar experi\u00eancias digitais incr\u00edveis. Com uma s\u00f3lida forma\u00e7\u00e3o em HTML, CSS e JavaScript, estou sempre em busca de novos desafios e oportunidades para aprimorar minhas habilidades. Minha jornada na programa\u00e7\u00e3o come\u00e7ou h\u00e1 alguns anos, e desde ent\u00e3o tenho trabalhado em diversos projetos que me permitiram explorar minha criatividade e resolver problemas de forma eficaz. Estou sempre atualizado com as \u00faltimas tend\u00eancias e tecnologias do setor, o que me permite entregar solu\u00e7\u00f5es modernas e eficientes.<\/p>",
+    "sobre_titulo": "Sobre <span>Mim.<\/span>"
+}

@@ -1,0 +1,16 @@
+{
+    "admin": {
+        "senha": "$2y$10$2JgFQaVfVQSq8l9b0g4u0ufRS3EsGtgNycKr3Hkw3X6mNZrkSfwoq",
+        "nome": "Administrador",
+        "email": "admin@exemplo.com",
+        "data_criacao": "2024-01-01 00:00:00",
+        "criado_por": "sistema"
+    },
+    "admin2": {
+        "senha": "$2y$10$uwkyMCBUS9o2IASjMdM7zuvB8VycKtbTv6ogxcp5xftg2ZCEEWDem",
+        "nome": "Alexandro Martins",
+        "email": "suporte@a7sites.com.br",
+        "data_criacao": "2025-06-27 16:10:27",
+        "criado_por": "admin"
+    }
+}
