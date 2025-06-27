@@ -23,7 +23,7 @@ Sistema de administração completo com autenticação segura e gerenciamento de
 1. **Certifique-se de ter PHP instalado** (versão 7.4 ou superior)
 2. **Configure um servidor web** (Apache, Nginx, ou servidor local como XAMPP/Laragon)
 3. **Coloque os arquivos** na pasta do seu servidor web
-4. **Acesse** `http://seudominio.com/desenvolvedor/admin.php`
+4. **Acesse** `http://seudominio.com/admin.php`
 
 ## 🔑 Credenciais Padrão
 
