@@ -1,27 +1,51 @@
+console.log('JS carregado!');
+
 function enviarWhatsapp(event) {
   event.preventDefault();
 
   const nome = document.getElementById("nome").value.trim();
+  const whatsapp = document.getElementById("whatsapp").value.trim();
   const msg = document.getElementById("msg").value.trim();
   const erroBox = document.getElementById("erroMensagem");
 
-  if (nome === "" || msg === "") {
-    erroBox.classList.add("mostrar");
+  console.log('Clique em Enviar WhatsApp:', { nome, whatsapp, msg });
 
+  if (nome === "" || whatsapp === "" || msg === "") {
+    erroBox.classList.add("mostrar");
     setTimeout(() => {
       erroBox.classList.remove("mostrar");
     }, 3000);
-
     return;
   }
 
-  const telefone = '5531995999029';
-  const texto = `Olá! Meu nome é ${nome}, ${msg}. Você pode me contatar pelo whatsapp?`;
-  const msgFormatada = encodeURIComponent(texto);
+  // Telefone do destinatário fixo (seu número)
+  const telefoneDestino = '5531995999029';
 
-  const url = `https://wa.me/${telefone}?text=${msgFormatada}`;
+  // Enviar dados para o processar_contato.php
+  const formData = new FormData();
+  formData.append('nome', nome);
+  formData.append('whatsapp', whatsapp);
+  formData.append('mensagem', msg);
 
-  window.open(url, '_blank');
+  fetch('processar_contato.php', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => {
+    // Após salvar o contato, redirecionar para o WhatsApp
+    const texto = `Olá! Meu nome é ${nome} e meu whatsapp é ${whatsapp}, ${msg}. Você pode me contatar pelo whatsapp ${whatsapp}?`;
+    const msgFormatada = encodeURIComponent(texto);
+    const url = `https://wa.me/${telefoneDestino}?text=${msgFormatada}`;
+    window.open(url, '_blank');
+  })
+  .catch(error => {
+    console.error('Erro ao salvar contato:', error);
+    // Mesmo com erro, ainda redireciona para o WhatsApp
+    const texto = `Olá! Meu nome é ${nome}, ${msg}. Você pode me contatar pelo whatsapp ${whatsapp}?`;
+    const msgFormatada = encodeURIComponent(texto);
+    const url = `https://wa.me/${telefoneDestino}?text=${msgFormatada}`;
+    window.open(url, '_blank');
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -84,4 +108,14 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
    
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('formulario');
+  if (form) {
+    form.addEventListener('submit', enviarWhatsapp);
+    console.log('EventListener de submit adicionado!');
+  } else {
+    console.log('Formulário não encontrado!');
+  }
 });

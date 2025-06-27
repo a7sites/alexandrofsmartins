@@ -38,6 +38,27 @@ if (file_exists($config_file_painel)) {
    $config_painel = json_decode(file_get_contents($config_file_painel), true) ?? $default_config;
 }
 
+// Reordena o array de menus para colocar 'registros' logo após 'perfil'
+$menus = $config_painel['menus'];
+$novo_menus = [];
+foreach ($menus as $menu) {
+   if ($menu['id'] === 'dashboard') $novo_menus[] = $menu;
+   if ($menu['id'] === 'perfil') {
+      $novo_menus[] = $menu;
+      // Após perfil, inserir registros
+      foreach ($menus as $m2) {
+         if ($m2['id'] === 'registros') $novo_menus[] = $m2;
+      }
+   }
+}
+// Adiciona os demais menus (exceto registros, já inserido)
+foreach ($menus as $menu) {
+   if ($menu['id'] !== 'dashboard' && $menu['id'] !== 'perfil' && $menu['id'] !== 'registros' && $menu['id'] !== 'sair') {
+      $novo_menus[] = $menu;
+   }
+}
+$config_painel['menus'] = $novo_menus;
+
 // Mensagens de feedback
 $success = $_GET['success'] ?? '';
 $error = $_GET['error'] ?? '';
@@ -102,8 +123,11 @@ $error = $_GET['error'] ?? '';
                            case 'usuarios':
                               echo 'visualizar_usuarios.php';
                               break;
+                           case 'registros':
+                              echo 'registros.php';
+                              break;
                            case 'ver_site':
-                              echo 'index.html';
+                              echo 'index.php';
                               break;
                            case 'configuracoes':
                               echo 'configuracoes.php';

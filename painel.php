@@ -20,6 +20,7 @@ $default_config = [
       ['id' => 'editar_site', 'nome' => 'Editar Site', 'icone' => 'fas fa-edit'],
       ['id' => 'cadastrar', 'nome' => 'Cadastrar Usuário', 'icone' => 'fas fa-user-plus'],
       ['id' => 'usuarios', 'nome' => 'Ver Usuários', 'icone' => 'fas fa-users'],
+      ['id' => 'registros', 'nome' => 'Registros', 'icone' => 'fas fa-phone'],
       ['id' => 'ver_site', 'nome' => 'Ver Site', 'icone' => 'fas fa-home'],
       ['id' => 'configuracoes', 'nome' => 'Configurações', 'icone' => 'fas fa-cog'],
       ['id' => 'sair', 'nome' => 'Sair', 'icone' => 'fas fa-sign-out-alt'],
@@ -37,6 +38,27 @@ if (!empty($config['timezone'])) {
 $nome_usuario = $_SESSION['nome'] ?? 'Usuário';
 $usuario = $_SESSION['usuario'] ?? '';
 $data_login = $_SESSION['data_login'] ?? '';
+
+// Reordena o array de menus para colocar 'registros' logo após 'perfil'
+$menus = $config['menus'];
+$novo_menus = [];
+foreach ($menus as $menu) {
+   if ($menu['id'] === 'dashboard') $novo_menus[] = $menu;
+   if ($menu['id'] === 'perfil') {
+      $novo_menus[] = $menu;
+      // Após perfil, inserir registros
+      foreach ($menus as $m2) {
+         if ($m2['id'] === 'registros') $novo_menus[] = $m2;
+      }
+   }
+}
+// Adiciona os demais menus (exceto registros, já inserido)
+foreach ($menus as $menu) {
+   if ($menu['id'] !== 'dashboard' && $menu['id'] !== 'perfil' && $menu['id'] !== 'registros' && $menu['id'] !== 'sair') {
+      $novo_menus[] = $menu;
+   }
+}
+$config['menus'] = $novo_menus;
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -81,8 +103,11 @@ $data_login = $_SESSION['data_login'] ?? '';
                            case 'usuarios':
                               echo 'visualizar_usuarios.php';
                               break;
+                           case 'registros':
+                              echo 'registros.php';
+                              break;
                            case 'ver_site':
-                              echo 'index.html';
+                              echo 'index.php';
                               break;
                            case 'configuracoes':
                               echo 'configuracoes.php';
@@ -114,6 +139,10 @@ $data_login = $_SESSION['data_login'] ?? '';
                   <p>Usuários Cadastrados</p>
                </div>
                <div class="stat-card">
+                  <h3><?php echo count(json_decode(file_get_contents('whatsapp.json'), true) ?? []); ?></h3>
+                  <p>Contatos WhatsApp</p>
+               </div>
+               <div class="stat-card">
                   <h3><?php echo date('d/m/Y'); ?></h3>
                   <p>Data Atual</p>
                </div>
@@ -134,6 +163,12 @@ $data_login = $_SESSION['data_login'] ?? '';
                   <h3>📊 Visualizar Usuários</h3>
                   <p>Veja todos os usuários cadastrados no sistema com suas informações.</p>
                   <a href="visualizar_usuarios.php" class="btn">Ver Usuários</a>
+               </div>
+
+               <div class="action-card">
+                  <h3>📞 Registros WhatsApp</h3>
+                  <p>Visualize e gerencie todos os contatos que entraram em contato pelo WhatsApp.</p>
+                  <a href="registros.php" class="btn">Ver Registros</a>
                </div>
 
                <div class="action-card">

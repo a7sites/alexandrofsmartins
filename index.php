@@ -194,12 +194,15 @@ function hexToRgba($hex)
       <div class="interface">
          <h2 class="title_page">Fale <span>Comigo</span></h2>
 
-         <form class="form_whatsapp" id="formulario" onSubmit="enviarWhatsapp(event)">
+         <form class="form_whatsapp" id="formulario">
 
             <div id="erroMensagem" class="erro-popup">Erro ao enviar sua mensagem. Todos os campos precisam ser preenchidos.</div>
 
             <div class="grupo_form">
                <input placeholder="Seu Nome" id="nome" class="campo_form">
+            </div>
+            <div class="grupo_form">
+               <input placeholder="Seu WhatsApp" id="whatsapp" class="campo_form">
             </div>
             <div class="grupo_form">
                <textarea class="campo_form" rows="5" id="msg" placeholder="Sua Mensagem"></textarea>
@@ -213,6 +216,76 @@ function hexToRgba($hex)
       </div>
 
    </section>
+
+   <script>
+      document.addEventListener('DOMContentLoaded', function() {
+         const form = document.getElementById('formulario');
+         const whatsappInput = document.getElementById('whatsapp');
+         if (form) {
+            form.addEventListener('submit', enviarWhatsapp);
+         }
+         if (whatsappInput) {
+            whatsappInput.addEventListener('input', function(e) {
+               let v = this.value.replace(/\D/g, '');
+               v = v.replace(/^0/, '');
+               if (v.length > 11) v = v.slice(0, 11);
+               if (v.length > 10) {
+                  // Celular: (99) 9 9999-9999
+                  v = v.replace(/^(\d{2})(\d{1})(\d{4})(\d{4}).*/, '($1) $2 $3-$4');
+               } else if (v.length > 6) {
+                  // Fixo: (99) 9999-9999
+                  v = v.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
+               } else if (v.length > 2) {
+                  v = v.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
+               } else {
+                  v = v.replace(/^(\d*)/, '($1');
+               }
+               this.value = v;
+            });
+         }
+      });
+
+      function enviarWhatsapp(event) {
+         event.preventDefault();
+         const nome = document.getElementById('nome').value.trim();
+         const whatsapp = document.getElementById('whatsapp').value.replace(/\D/g, '');
+         const msg = document.getElementById('msg').value.trim();
+         const erroBox = document.getElementById('erroMensagem');
+
+         if (nome === "" || whatsapp === "" || msg === "") {
+            erroBox.style.display = "block";
+            setTimeout(() => {
+               erroBox.style.display = "none";
+            }, 3000);
+            return;
+         }
+
+         const telefoneDestino = '5531995999029';
+
+         const formData = new FormData();
+         formData.append('nome', nome);
+         formData.append('whatsapp', whatsapp);
+         formData.append('mensagem', msg);
+
+         fetch('processar_contato.php', {
+               method: 'POST',
+               body: formData
+            })
+            .then(response => {
+               const texto = `Olá! Meu nome é ${nome} e meu whatsapp é ${whatsapp}, ${msg}. Você pode me contatar pelo whatsapp ${whatsapp}?`;
+               const msgFormatada = encodeURIComponent(texto);
+               const url = `https://wa.me/${telefoneDestino}?text=${msgFormatada}`;
+               window.open(url, '_blank');
+            })
+            .catch(error => {
+               console.error('Erro ao salvar contato:', error);
+               const texto = `Olá! Meu nome é ${nome}, ${msg}. Você pode me contatar pelo whatsapp ${whatsapp}?`;
+               const msgFormatada = encodeURIComponent(texto);
+               const url = `https://wa.me/${telefoneDestino}?text=${msgFormatada}`;
+               window.open(url, '_blank');
+            });
+      }
+   </script>
 </body>
 
 </html>

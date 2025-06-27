@@ -1,8 +1,8 @@
 {
     "titulo": "Painel A7 Sites",
     "sidebar_color": "#260a3d",
-    "shrink_sidebar": true,
-    "timezone": "America\/Sao_Paulo",
+    "shrink_sidebar": false,
+    "timezone": "America/Sao_Paulo",
     "menus": [
         {
             "id": "dashboard",
@@ -21,13 +21,18 @@
         },
         {
             "id": "cadastrar",
-            "nome": "Cadastrar Usu\u00e1rio",
+            "nome": "Cadastrar Usuário",
             "icone": "fas fa-user-plus"
         },
         {
             "id": "usuarios",
-            "nome": "Ver Usu\u00e1rios",
+            "nome": "Ver Usuários",
             "icone": "fas fa-users"
+        },
+        {
+            "id": "registros",
+            "nome": "Registros",
+            "icone": "fas fa-phone"
         },
         {
             "id": "ver_site",
@@ -36,7 +41,7 @@
         },
         {
             "id": "configuracoes",
-            "nome": "Configura\u00e7\u00f5es",
+            "nome": "Configurações",
             "icone": "fas fa-cog"
         },
         {

@@ -1,0 +1,26 @@
+[
+    {
+        "nome": "Marco Antomio",
+        "whatsapp": "31999599902",
+        "mensagem": "Mascara ok",
+        "data_hora": "2025-06-27 19:52:29",
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/137.0.0.0 Safari\/537.36"
+    },
+    {
+        "nome": "Julio Sales",
+        "whatsapp": "31999599902",
+        "mensagem": "Mascara ok",
+        "data_hora": "2025-06-27 20:08:49",
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/137.0.0.0 Safari\/537.36"
+    },
+    {
+        "nome": "Marcelo Freitas",
+        "whatsapp": "31999599902",
+        "mensagem": "Mascara ok",
+        "data_hora": "2025-06-27 20:14:44",
+        "ip": "127.0.0.1",
+        "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/137.0.0.0 Safari\/537.36"
+    }
+]

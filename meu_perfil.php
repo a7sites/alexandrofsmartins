@@ -47,6 +47,27 @@ if (file_exists($config_file)) {
    $config = json_decode(file_get_contents($config_file), true) ?? $default_config;
 }
 
+// Reordena o array de menus para colocar 'registros' logo após 'perfil'
+$menus = $config['menus'];
+$novo_menus = [];
+foreach ($menus as $menu) {
+   if ($menu['id'] === 'dashboard') $novo_menus[] = $menu;
+   if ($menu['id'] === 'perfil') {
+      $novo_menus[] = $menu;
+      // Após perfil, inserir registros
+      foreach ($menus as $m2) {
+         if ($m2['id'] === 'registros') $novo_menus[] = $m2;
+      }
+   }
+}
+// Adiciona os demais menus (exceto registros, já inserido)
+foreach ($menus as $menu) {
+   if ($menu['id'] !== 'dashboard' && $menu['id'] !== 'perfil' && $menu['id'] !== 'registros' && $menu['id'] !== 'sair') {
+      $novo_menus[] = $menu;
+   }
+}
+$config['menus'] = $novo_menus;
+
 // Mensagens de feedback
 $success = $_GET['success'] ?? '';
 $error = $_GET['error'] ?? '';
@@ -61,6 +82,35 @@ $error = $_GET['error'] ?? '';
    <link rel="stylesheet" href="css/painel.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+   <style>
+      /* Forçar visual padronizado nos campos de redes sociais */
+      .campo_form {
+         width: 100%;
+         padding: 1rem;
+         background: #fff;
+         border-radius: 8px;
+         color: #333;
+         border: 2px solid #e1e5e9;
+         outline: none;
+         font-family: inherit;
+         font-size: 1rem;
+         font-weight: 400;
+         margin-bottom: 0.5rem;
+         box-sizing: border-box;
+         transition: border 0.2s;
+      }
+
+      .campo_form:focus {
+         border-color: #667eea;
+         box-shadow: 0 0 5px rgba(124, 58, 237, 0.2);
+      }
+
+      .campo_form::placeholder {
+         color: #888;
+         opacity: 0.7;
+         font-size: 0.97rem;
+      }
+   </style>
 </head>
 
 <body>
@@ -94,8 +144,11 @@ $error = $_GET['error'] ?? '';
                            case 'usuarios':
                               echo 'visualizar_usuarios.php';
                               break;
+                           case 'registros':
+                              echo 'registros.php';
+                              break;
                            case 'ver_site':
-                              echo 'index.html';
+                              echo 'index.php';
                               break;
                            case 'configuracoes':
                               echo 'configuracoes.php';
@@ -176,31 +229,31 @@ $error = $_GET['error'] ?? '';
                         <div class="form-row">
                            <div class="form-group">
                               <label for="github">GitHub:</label>
-                              <input type="url" id="github" name="github" value="<?php echo htmlspecialchars($perfil['github']); ?>" placeholder="https://github.com/seuusuario">
+                              <input type="url" id="github" name="github" value="<?php echo htmlspecialchars($perfil['github']); ?>" placeholder="https://github.com/seuusuario" class="campo_form">
                            </div>
                            <div class="form-group">
                               <label for="linkedin">LinkedIn:</label>
-                              <input type="url" id="linkedin" name="linkedin" value="<?php echo htmlspecialchars($perfil['linkedin']); ?>" placeholder="https://linkedin.com/in/seuusuario">
+                              <input type="url" id="linkedin" name="linkedin" value="<?php echo htmlspecialchars($perfil['linkedin']); ?>" placeholder="https://linkedin.com/in/seuusuario" class="campo_form">
                            </div>
                         </div>
                         <div class="form-row">
                            <div class="form-group">
                               <label for="instagram">Instagram:</label>
-                              <input type="url" id="instagram" name="instagram" value="<?php echo htmlspecialchars($perfil['instagram']); ?>" placeholder="https://instagram.com/seuusuario">
+                              <input type="url" id="instagram" name="instagram" value="<?php echo htmlspecialchars($perfil['instagram']); ?>" placeholder="https://instagram.com/seuusuario" class="campo_form">
                            </div>
                            <div class="form-group">
                               <label for="facebook">Facebook:</label>
-                              <input type="url" id="facebook" name="facebook" value="<?php echo htmlspecialchars($perfil['facebook']); ?>" placeholder="https://facebook.com/seuusuario">
+                              <input type="url" id="facebook" name="facebook" value="<?php echo htmlspecialchars($perfil['facebook']); ?>" placeholder="https://facebook.com/seuusuario" class="campo_form">
                            </div>
                         </div>
                         <div class="form-row">
                            <div class="form-group">
                               <label for="twitter">Twitter:</label>
-                              <input type="url" id="twitter" name="twitter" value="<?php echo htmlspecialchars($perfil['twitter']); ?>" placeholder="https://twitter.com/seuusuario">
+                              <input type="url" id="twitter" name="twitter" value="<?php echo htmlspecialchars($perfil['twitter']); ?>" placeholder="https://twitter.com/seuusuario" class="campo_form">
                            </div>
                            <div class="form-group">
                               <label for="youtube">YouTube:</label>
-                              <input type="url" id="youtube" name="youtube" value="<?php echo htmlspecialchars($perfil['youtube']); ?>" placeholder="https://youtube.com/@seucanal">
+                              <input type="url" id="youtube" name="youtube" value="<?php echo htmlspecialchars($perfil['youtube']); ?>" placeholder="https://youtube.com/@seucanal" class="campo_form">
                            </div>
                         </div>
                      </div>

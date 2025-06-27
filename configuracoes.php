@@ -38,6 +38,27 @@ $timezones = [
 $success = $_GET['success'] ?? '';
 $error = $_GET['error'] ?? '';
 $sidebar_color = !empty($config['sidebar_color']) ? $config['sidebar_color'] : '#23282d';
+
+// Reordena o array de menus para colocar 'registros' logo após 'perfil'
+$menus = $config['menus'];
+$novo_menus = [];
+foreach ($menus as $menu) {
+   if ($menu['id'] === 'dashboard') $novo_menus[] = $menu;
+   if ($menu['id'] === 'perfil') {
+      $novo_menus[] = $menu;
+      // Após perfil, inserir registros
+      foreach ($menus as $m2) {
+         if ($m2['id'] === 'registros') $novo_menus[] = $m2;
+      }
+   }
+}
+// Adiciona os demais menus (exceto registros, já inserido)
+foreach ($menus as $menu) {
+   if ($menu['id'] !== 'dashboard' && $menu['id'] !== 'perfil' && $menu['id'] !== 'registros' && $menu['id'] !== 'sair') {
+      $novo_menus[] = $menu;
+   }
+}
+$config['menus'] = $novo_menus;
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -82,8 +103,11 @@ $sidebar_color = !empty($config['sidebar_color']) ? $config['sidebar_color'] : '
                            case 'usuarios':
                               echo 'visualizar_usuarios.php';
                               break;
+                           case 'registros':
+                              echo 'registros.php';
+                              break;
                            case 'ver_site':
-                              echo 'index.html';
+                              echo 'index.php';
                               break;
                            case 'configuracoes':
                               echo 'configuracoes.php';
