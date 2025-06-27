@@ -69,6 +69,103 @@ $config['menus'] = $novo_menus;
    <link rel="stylesheet" href="css/painel.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+   <style>
+      .users-table {
+         max-width: 100vw;
+         min-width: 1100px;
+         overflow-x: auto;
+      }
+
+      .users-table table {
+         width: 100% !important;
+         table-layout: auto !important;
+         min-width: 1000px;
+      }
+
+      .users-table th,
+      .users-table td {
+         padding: 10px 12px !important;
+         font-size: 0.97rem;
+         white-space: nowrap;
+         vertical-align: middle !important;
+      }
+
+      .users-table th {
+         text-align: left;
+      }
+
+      .users-table td {
+         text-align: left;
+      }
+
+      .users-table td .user-avatar {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         margin: 0 auto;
+      }
+
+      .users-table td:last-child {
+         text-align: center;
+         padding-top: 0 !important;
+         padding-bottom: 0 !important;
+      }
+
+      .users-table .acoes-btns {
+         display: flex;
+         flex-direction: row;
+         gap: 6px;
+         justify-content: flex-start;
+         align-items: center;
+         margin: 0;
+         padding: 0;
+         height: 36px;
+      }
+
+      @media (max-width: 900px) {
+         .users-table .acoes-btns {
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
+            gap: 4px;
+         }
+      }
+
+      .users-table .btn,
+      .users-table .btn-roxo {
+         width: 100px;
+         min-width: 100px;
+         max-width: 100px;
+         height: 36px;
+         padding: 0;
+         font-size: 0.93rem;
+         border-radius: 4px;
+         margin-bottom: 0;
+         text-align: center;
+         display: inline-block;
+         line-height: 36px;
+         vertical-align: middle;
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
+      }
+
+      .users-table .btn-danger {
+         background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+         color: #fff;
+      }
+
+      .users-table .btn-secondary {
+         background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
+         color: #fff;
+      }
+
+      .users-table .btn-roxo {
+         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+         color: #fff;
+         border: none;
+      }
+   </style>
 </head>
 
 <body>
@@ -153,6 +250,7 @@ $config['menus'] = $novo_menus;
                                  <th>Nome</th>
                                  <th>E-mail</th>
                                  <th>Data de Criação</th>
+                                 <th>Último Login</th>
                                  <th>Ações</th>
                               </tr>
                            </thead>
@@ -168,13 +266,20 @@ $config['menus'] = $novo_menus;
                                     <td><?php echo htmlspecialchars($dados['nome']); ?></td>
                                     <td><?php echo htmlspecialchars($dados['email']); ?></td>
                                     <td><?php echo date('d/m/Y H:i', strtotime($dados['data_criacao'])); ?></td>
+                                    <td><?php echo isset($dados['ultimo_login']) ? date('d/m/Y H:i', strtotime($dados['ultimo_login'])) : '<span style=\'color:#aaa\'>Nunca</span>'; ?></td>
                                     <td>
-                                       <a href="editar_usuario.php?usuario=<?php echo urlencode($usuario); ?>" class="btn btn-secondary">Editar</a>
-                                       <?php if ($usuario !== $_SESSION['usuario']): ?>
-                                          <a href="excluir_usuario.php?usuario=<?php echo urlencode($usuario); ?>" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este usuário?')">Excluir</a>
-                                       <?php else: ?>
-                                          <span style="color: #666; font-size: 0.9rem;">Usuário Atual</span>
-                                       <?php endif; ?>
+                                       <div class="acoes-btns">
+                                          <a href="editar_usuario.php?usuario=<?php echo urlencode($usuario); ?>" class="btn btn-secondary">Editar</a>
+                                          <?php if ($usuario !== $_SESSION['usuario']): ?>
+                                             <a href="excluir_usuario.php?usuario=<?php echo urlencode($usuario); ?>" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este usuário?')">Excluir</a>
+                                             <form method="post" action="desconectar_usuario.php" style="display:inline;">
+                                                <input type="hidden" name="usuario" value="<?php echo htmlspecialchars($usuario); ?>">
+                                                <button type="submit" class="btn btn-roxo">Desconectar</button>
+                                             </form>
+                                          <?php else: ?>
+                                             <span style="color: #666; font-size: 0.9rem;">Usuário Atual</span>
+                                          <?php endif; ?>
+                                       </div>
                                     </td>
                                  </tr>
                               <?php endforeach; ?>

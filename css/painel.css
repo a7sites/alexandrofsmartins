@@ -144,7 +144,7 @@ body {
 
 /* Container do Conteúdo */
 .content-container {
-   padding: 30px;
+   
 }
 
 /* Estilos para Abas */
@@ -455,7 +455,7 @@ body {
    background: rgba(255,255,255,0.3);
 }
 .container {
-   max-width: 1200px;
+   max-width: 1400px;
    margin: 2rem auto;
    padding: 0 2rem;
 }
@@ -785,17 +785,23 @@ input[type="color"] {
    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
    padding: 2rem;
    margin-top: 2rem;
+   max-width: 100%;
+   min-width: 900px;
+   overflow-x: auto;
 }
 .users-table table {
    width: 100% !important;
    border-collapse: collapse !important;
    margin-bottom: 1rem !important;
    background: #fff !important;
+   table-layout: auto !important;
 }
 .users-table th, .users-table td {
-   padding: 12px 10px !important;
+   padding: 10px 6px !important;
    text-align: left !important;
    border-bottom: 1px solid #e1e5e9 !important;
+   font-size: 0.98rem;
+   white-space: nowrap;
 }
 .users-table th {
    background: #f5f7fa !important;
@@ -805,6 +811,20 @@ input[type="color"] {
 }
 .users-table tr:last-child td {
    border-bottom: none !important;
+}
+.users-table .btn {
+   min-width: 70px;
+   max-width: 110px;
+   padding: 7px 10px;
+   font-size: 0.95rem;
+   border-radius: 4px;
+   margin-bottom: 4px;
+}
+.users-table .btn-danger {
+   background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+}
+.users-table .btn-secondary {
+   background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
 }
 .user-avatar {
    width: 38px;
@@ -819,10 +839,6 @@ input[type="color"] {
    font-size: 1.1rem;
    margin: 0 auto;
    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-.users-table .btn {
-   min-width: 90px;
-   margin-bottom: 6px;
 }
 .stats-card {
    background: #fff;

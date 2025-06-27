@@ -51,6 +51,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $_SESSION['nome'] = $usuarios[$usuario]['nome'];
       $_SESSION['data_login'] = date('Y-m-d H:i:s');
 
+      // Definir timezone do painel
+      $config_file = 'painel_config.json';
+      $timezone = 'America/Sao_Paulo';
+      if (file_exists($config_file)) {
+         $config = json_decode(file_get_contents($config_file), true);
+         if (!empty($config['timezone'])) {
+            $timezone = $config['timezone'];
+         }
+      }
+      date_default_timezone_set($timezone);
+
+      // Salvar último login no JSON
+      $usuarios[$usuario]['ultimo_login'] = date('Y-m-d H:i:s');
+      file_put_contents($arquivo_usuarios, json_encode($usuarios, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
       header('Location: painel.php');
       exit;
    } else {
