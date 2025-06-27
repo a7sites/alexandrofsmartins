@@ -147,7 +147,7 @@ $data_login = $_SESSION['data_login'] ?? '';
    </div>
 
    <div class="footer">
-      <p>&copy; 2024 Painel Administrativo - Desenvolvido com segurança</p>
+      <p>&copy; 2024 Painel Administrativo - Desenvolvido com segurança por Alexandro F. S. Martins</p>
    </div>
 </body>
 
