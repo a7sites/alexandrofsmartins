@@ -154,6 +154,16 @@ Para atualizar o sistema:
 - Personalização de cores e modo encolhido da barra lateral.
 - Seletor visual de ícones Bootstrap.
 
+## 📝 Alterações Recentes
+
+- Ajuste do timezone do último login conforme configuração do painel.
+- Coluna "Último Login" agora sempre mostra o horário correto.
+- Tabela de usuários mais larga, centralizada e com espaçamento melhorado.
+- Botões de ação (Editar, Excluir, Desconectar) padronizados, menores e alinhados.
+- Botão "Desconectar" roxo, com largura e altura igual aos demais.
+- Ações agrupadas horizontalmente, sem espaço extra.
+- Dados da tabela centralizados e alinhados para melhor leitura.
+
 ---
 
 **Desenvolvido com segurança, integração e experiência moderna!** 🚀

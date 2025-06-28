@@ -43,7 +43,7 @@
         </div>
     </div>
     <div class="login-footer">
-        Precisa de ajuda? <a href="index.html" style="color:#6c2c8f;text-decoration:underline;">Visite nosso site</a>
+        Precisa de ajuda? <a href="index.php" style="color:#6c2c8f;text-decoration:underline;">Visite nosso site</a>
     </div>
     <script>
         function togglePassword() {

@@ -123,6 +123,11 @@ $config['menus'] = $novo_menus;
 
       <!-- Conteúdo Principal -->
       <div class="main-content">
+         <!-- Botão mobile para menu -->
+         <div class="mobile-menu-btn" onclick="toggleSidebar()">
+            <i class="fas fa-bars"></i>
+         </div>
+
          <div class="content-header">
             <h2>Dashboard</h2>
          </div>
@@ -174,7 +179,7 @@ $config['menus'] = $novo_menus;
                <div class="action-card">
                   <h3>🏠 Voltar ao Site</h3>
                   <p>Retorne à página principal do site.</p>
-                  <a href="index.html" class="btn">Ir para o Site</a>
+                  <a href="index.php" class="btn">Ir para o Site</a>
                </div>
             </div>
          </div>
@@ -184,6 +189,35 @@ $config['menus'] = $novo_menus;
    <div class="footer">
       <p>&copy; 2024 Painel Administrativo - Desenvolvido com segurança por Alexandro F. S. Martins</p>
    </div>
+
+   <script>
+      function toggleSidebar() {
+         const sidebar = document.querySelector('.sidebar');
+         sidebar.classList.toggle('open');
+      }
+
+      // Fechar sidebar ao clicar fora dela em mobile
+      document.addEventListener('click', function(e) {
+         const sidebar = document.querySelector('.sidebar');
+         const mobileBtn = document.querySelector('.mobile-menu-btn');
+
+         if (window.innerWidth <= 768 &&
+            sidebar.classList.contains('open') &&
+            !sidebar.contains(e.target) &&
+            !mobileBtn.contains(e.target)) {
+            sidebar.classList.remove('open');
+         }
+      });
+
+      // Fechar sidebar ao clicar em links do menu em mobile
+      document.querySelectorAll('.menu-item').forEach(link => {
+         link.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+               document.querySelector('.sidebar').classList.remove('open');
+            }
+         });
+      });
+   </script>
 </body>
 
 </html>

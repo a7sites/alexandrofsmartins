@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Responsividade</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+        .test-section h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        .breakpoint-info {
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .link-list {
+            list-style: none;
+            padding: 0;
+        }
+        .link-list li {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        .link-list a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .link-list a:hover {
+            text-decoration: underline;
+        }
+        .responsive-info {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .responsive-info h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+        .responsive-info ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .responsive-info li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Teste de Responsividade - Sistema Alexandro Martins</h1>
+        
+        <div class="responsive-info">
+            <h3>📱 Funcionalidades Responsivas Implementadas:</h3>
+            <ul>
+                <li><strong>Site Principal:</strong> Menu mobile com hamburger, layout adaptativo, grid responsivo para especialidades</li>
+                <li><strong>Painel Administrativo:</strong> Sidebar mobile, tabelas com scroll horizontal, formulários adaptativos</li>
+                <li><strong>Login:</strong> Layout responsivo para diferentes tamanhos de tela</li>
+                <li><strong>Registros:</strong> Tabela responsiva com scroll, modal adaptativo</li>
+                <li><strong>Breakpoints:</strong> 1200px, 1024px, 768px, 480px, 360px</li>
+            </ul>
+        </div>
+
+        <div class="test-section">
+            <h2>🌐 Site Principal</h2>
+            <div class="breakpoint-info">
+                <strong>Teste em diferentes resoluções:</strong><br>
+                • Desktop: 1920x1080, 1366x768<br>
+                • Tablet: 768x1024, 1024x768<br>
+                • Mobile: 375x667, 414x896, 360x640
+            </div>
+            <ul class="link-list">
+                <li><a href="index.php" target="_blank">🏠 Página Principal</a> - Teste o menu mobile e layout responsivo</li>
+                <li><a href="teste_contato.html" target="_blank">📞 Formulário de Contato</a> - Teste o formulário responsivo</li>
+            </ul>
+        </div>
+
+        <div class="test-section">
+            <h2>⚙️ Painel Administrativo</h2>
+            <div class="breakpoint-info">
+                <strong>Funcionalidades mobile:</strong><br>
+                • Menu lateral com botão hamburger<br>
+                • Tabelas com scroll horizontal<br>
+                • Formulários em coluna única
+            </div>
+            <ul class="link-list">
+                <li><a href="admin.php" target="_blank">🔐 Página de Login</a> - Teste o login responsivo</li>
+                <li><a href="painel.php" target="_blank">📊 Dashboard</a> - Teste o painel principal (requer login)</li>
+                <li><a href="registros.php" target="_blank">📞 Registros</a> - Teste a tabela responsiva (requer login)</li>
+                <li><a href="visualizar_usuarios.php" target="_blank">👥 Usuários</a> - Teste a tabela de usuários (requer login)</li>
+            </ul>
+        </div>
+
+        <div class="test-section">
+            <h2>📱 Testes Específicos Mobile</h2>
+            <div class="breakpoint-info">
+                <strong>O que testar em mobile:</strong><br>
+                • Menu hamburger abre/fecha corretamente<br>
+                • Formulários são legíveis e funcionais<br>
+                • Tabelas têm scroll horizontal<br>
+                • Botões têm tamanho adequado para toque
+            </div>
+            <ul class="link-list">
+                <li><strong>Menu Mobile:</strong> Clique no ícone hamburger (≡) no header</li>
+                <li><strong>Formulários:</strong> Teste preenchimento em telas pequenas</li>
+                <li><strong>Tabelas:</strong> Deslize horizontalmente para ver todas as colunas</li>
+                <li><strong>Modais:</strong> Teste abertura e fechamento em mobile</li>
+            </ul>
+        </div>
+
+        <div class="test-section">
+            <h2>🎯 Breakpoints Implementados</h2>
+            <div class="breakpoint-info">
+                <strong>Resoluções de teste:</strong>
+            </div>
+            <ul class="link-list">
+                <li><strong>Desktop Grande:</strong> 1200px+ - Layout completo</li>
+                <li><strong>Desktop:</strong> 1024px - Ajustes menores</li>
+                <li><strong>Tablet:</strong> 768px - Menu mobile, grid adaptativo</li>
+                <li><strong>Mobile Grande:</strong> 480px - Layout otimizado</li>
+                <li><strong>Mobile Pequeno:</strong> 360px - Layout compacto</li>
+            </ul>
+        </div>
+
+        <div class="test-section">
+            <h2>🔧 Ferramentas de Teste</h2>
+            <div class="breakpoint-info">
+                <strong>Como testar:</strong><br>
+                • Use F12 no navegador para abrir DevTools<br>
+                • Clique no ícone de dispositivo móvel<br>
+                • Teste diferentes resoluções
+            </div>
+            <ul class="link-list">
+                <li><strong>Chrome DevTools:</strong> Ctrl+Shift+M (toggle device mode)</li>
+                <li><strong>Firefox DevTools:</strong> Ctrl+Shift+M (responsive design mode)</li>
+                <li><strong>Safari:</strong> Develop > Enter Responsive Design Mode</li>
+                <li><strong>Dispositivo Real:</strong> Teste em smartphone/tablet real</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html> 
