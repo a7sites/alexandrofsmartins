@@ -1,169 +1,185 @@
-# 🔐 Painel Administrativo
+# 🚀 Painel Administrativo - Alexandro F. S. Martins
 
-Sistema de administração completo com autenticação segura e gerenciamento de usuários.
+Sistema completo de painel administrativo em PHP com integração WhatsApp, gerenciamento de usuários, configurações dinâmicas e interface moderna.
+
+## 📋 Funcionalidades
+
+- **Painel Administrativo Moderno**: Interface responsiva com menu lateral dinâmico
+- **Sistema de Login Seguro**: Autenticação com hash bcrypt e sessões
+- **Gerenciamento de Usuários**: Cadastro, edição, exclusão e visualização
+- **Integração WhatsApp**: Formulário de contato com salvamento automático
+- **Registros de Contatos**: Visualização e gerenciamento de contatos recebidos
+- **Configurações Dinâmicas**: Personalização de cores, menus e timezone
+- **Gerenciamento de Especialidades**: Sistema de abas com preview em tempo real
+- **Edição de Site**: Configuração de informações do site
+- **Alertas Visuais**: Sistema de notificações elegante
+- **Menu Lateral Responsivo**: Com opção de encolhimento
+- **Timezone Configurável**: Suporte a diferentes fusos horários
+
+## 🛠️ Tecnologias
+
+- **Backend**: PHP 8.3
+- **Frontend**: HTML5, CSS3, JavaScript
+- **Ícones**: Font Awesome 6.0, Bootstrap Icons
+- **Armazenamento**: JSON (usuários, configurações, contatos)
+- **Segurança**: Hash bcrypt, validação de sessões
 
 ## 📁 Estrutura de Arquivos
 
 ```
-/desenvolvedor/
-├── admin.php          ← Formulário de login
-├── login.php          ← Valida o login e inicia a sessão
-├── painel.php         ← Área protegida principal
-├── logout.php         ← Encerra a sessão
-├── usuarios.json      ← Armazena usuários e senhas criptografadas
-├── cadastrar.php      ← Página para cadastrar novos usuários
-├── salvar_usuario.php ← Processa o cadastro e salva no JSON
-├── visualizar_usuarios.php ← Lista todos os usuários
-├── .htaccess          ← Configurações de segurança
-└── README.md          ← Este arquivo
+alexandrofsmartins/
+├── .git/                           # Controle de versão Git
+├── .htaccess                       # Configurações de segurança Apache
+├── README.md                       # Documentação do projeto
+├── admin.php                       # Página de login administrativo
+├── cadastrar.php                   # Cadastro de novos usuários
+├── configuracoes.php               # Configurações do painel
+├── contatos_whatsapp.json          # Arquivo de contatos (legado)
+├── corrigir_senha.php              # Correção de senhas
+├── css/
+│   ├── efects.css                  # Efeitos visuais
+│   ├── painel.css                  # Estilos do painel administrativo
+│   └── style.css                   # Estilos do site principal
+├── debug_menu.php                  # Debug do sistema de menus
+├── desconectar_usuario.php         # Desconectar usuário específico
+├── editar_contato.php              # Edição de contatos WhatsApp
+├── editar_site.php                 # Edição de informações do site
+├── editar_usuario.php              # Edição de usuários
+├── especialidades_config.json      # Configurações de especialidades
+├── excluir_contato.php             # Exclusão de contatos
+├── excluir_usuario.php             # Exclusão de usuários
+├── gerar_hash.php                  # Geração de hash para senhas
+├── gerenciar_especialidades.php    # Gerenciamento de especialidades
+├── imgs/
+│   ├── a7site.svg                  # Logo A7 Sites
+│   ├── bg_0.jpg                    # Imagem de fundo alternativa
+│   ├── bg.jpg                      # Imagem de fundo principal
+│   ├── bg.webp                     # Imagem de fundo otimizada
+│   ├── favicon.png                 # Ícone do site
+│   └── img_perfil.jpeg             # Foto de perfil padrão
+├── index.php                       # Página principal do site
+├── js/
+│   └── script.js                   # JavaScript do site
+├── login.php                       # Processamento de login
+├── logout.php                      # Encerramento de sessão
+├── meu_perfil.php                  # Edição de perfil do usuário
+├── painel.php                      # Dashboard principal
+├── painel_config.json              # Configurações do painel
+├── processar_contato.php           # Processamento de contatos
+├── registros.php                   # Visualização de registros
+├── salvar_configuracoes.php        # Salvamento de configurações
+├── salvar_edicao_usuario.php       # Salvamento de edição de usuário
+├── salvar_especialidades.php       # Salvamento de especialidades
+├── salvar_perfil.php               # Salvamento de perfil
+├── salvar_site.php                 # Salvamento de informações do site
+├── salvar_usuario.php              # Salvamento de usuários
+├── site_config.json                # Configurações do site
+├── src/                            # Diretório de recursos (vazio)
+├── teste_contato.html              # Teste do formulário de contato
+├── teste_registros.php             # Teste do sistema de registros
+├── teste_simples.php               # Teste simples do sistema
+├── usuarios.json                   # Armazenamento de usuários
+├── visualizar_usuarios.php         # Listagem de usuários
+└── whatsapp.json                   # Contatos do WhatsApp
 ```
 
 ## 🚀 Instalação
 
-1. **Certifique-se de ter PHP instalado** (versão 7.4 ou superior)
-2. **Configure um servidor web** (Apache, Nginx, ou servidor local como XAMPP/Laragon)
-3. **Coloque os arquivos** na pasta do seu servidor web
-4. **Acesse** `http://seudominio.com/admin.php`
+1. Clone o repositório:
 
-## 🔑 Credenciais Padrão
+```bash
+git clone https://github.com/a7sites/alexandrofsmartins.git
+```
 
-- **Usuário:** `admin`
-- **Senha:** `admin123`
+2. Configure o servidor web (Apache/Nginx) para apontar para o diretório do projeto
 
-⚠️ **IMPORTANTE:** Altere essas credenciais após o primeiro login!
+3. Acesse `admin.php` para fazer o primeiro login
 
-## 🛡️ Recursos de Segurança
-
-### Implementados:
-
-- ✅ Senhas criptografadas com `password_hash()`
-- ✅ Validação de sessão em todas as páginas protegidas
-- ✅ Proteção contra listagem de diretórios
-- ✅ Headers de segurança HTTP
-- ✅ Validação de entrada de dados
-- ✅ Proteção do arquivo `usuarios.json`
-- ✅ Logout seguro
-
-### Validações de Senha:
-
-- Mínimo 6 caracteres
-- Pelo menos uma letra maiúscula
-- Pelo menos um número
-
-## 📋 Funcionalidades
-
-### 🔐 Autenticação
-
-- Login seguro com validação
-- Sessões PHP protegidas
-- Logout automático
-
-### 👥 Gerenciamento de Usuários
-
-- Cadastro de novos usuários
-- Visualização de todos os usuários
-- Validação de e-mail único
-- Histórico de criação
-
-### 📊 Dashboard
-
-- Estatísticas em tempo real
-- Interface responsiva
-- Navegação intuitiva
+4. Configure as opções do painel em "Configurações"
 
 ## 🔧 Configuração
 
-### Para produção:
+### Primeiro Acesso
 
-1. **Altere as credenciais padrão**
-2. **Configure HTTPS** (descomente as linhas no .htaccess)
-3. **Ajuste as permissões** dos arquivos:
-   ```bash
-   chmod 644 *.php *.html
-   chmod 600 usuarios.json
-   chmod 644 .htaccess
-   ```
+- URL: `admin.php`
+- Usuário padrão: `admin`
+- Senha padrão: `admin123`
 
-### Personalização:
+### Configurações do Painel
 
-- Edite os arquivos CSS inline para personalizar o visual
-- Modifique as validações em `salvar_usuario.php`
-- Ajuste as configurações de sessão no `.htaccess`
+- Título personalizável
+- Cor da barra lateral
+- Modo encolhido da sidebar
+- Timezone configurável
+- Menus editáveis com ícones
 
-## 🚨 Troubleshooting
+## 📱 Funcionalidades Principais
 
-### Problema: "Erro ao salvar usuário"
+### Dashboard
 
-**Solução:** Verifique as permissões da pasta e do arquivo `usuarios.json`
+- Estatísticas em tempo real
+- Acesso rápido às funcionalidades
+- Informações do sistema
 
-### Problema: "Sessão não inicia"
+### Gerenciamento de Usuários
 
-**Solução:** Verifique se o PHP tem permissão para escrever na pasta de sessões
+- Cadastro com validação
+- Edição de dados
+- Exclusão segura
+- Desconexão remota
+- Controle de último login
 
-### Problema: "Página não encontrada"
+### Integração WhatsApp
 
-**Solução:** Verifique se o mod_rewrite está habilitado no Apache
+- Formulário de contato no site
+- Salvamento automático em JSON
+- Visualização no painel
+- Edição e exclusão de contatos
+- Chamada direta via WhatsApp
 
-## 📞 Suporte
+### Configurações
 
-Para dúvidas ou problemas:
+- Personalização visual
+- Gerenciamento de menus
+- Configuração de timezone
+- Modo responsivo
 
-1. Verifique os logs de erro do PHP
-2. Confirme as permissões dos arquivos
-3. Teste em um servidor local primeiro
+## 🔒 Segurança
 
-## 🔄 Atualizações
-
-Para atualizar o sistema:
-
-1. Faça backup dos arquivos atuais
-2. Substitua os arquivos pelos novos
-3. Mantenha o arquivo `usuarios.json` existente
-4. Teste todas as funcionalidades
-
-## 🆕 Novas Funcionalidades (2024)
-
-### 📱 Registros de Contatos WhatsApp
-
-- Painel administrativo exibe todos os contatos enviados pelo formulário do site.
-- Tabela com nome, WhatsApp (com máscara), data/hora, último contato, e ações.
-- Botões para chamar no WhatsApp, editar e excluir contatos.
-- Tooltip mostra o tempo do último contato.
-- Edição e exclusão de contatos com feedback visual e atualização dinâmica.
-- Permite múltiplos registros com o mesmo WhatsApp.
-
-### 🔄 Integração Total com o Site
-
-- Formulário do site envia nome, WhatsApp e mensagem via AJAX para o painel.
-- Dados salvos em `whatsapp.json` e exibidos em tempo real no painel.
-- Máscara de telefone brasileira aplicada no front-end e back-end.
-- Timezone configurável para datas corretas.
-
-### 🎨 Visual Moderno e UX
-
-- Menu lateral dinâmico, com ordem e ícones personalizáveis.
-- Menu "Registros" sempre visível, logo abaixo de "Meu Perfil".
-- Alertas de sucesso/erro integrados ao painel, com sumiço automático.
-- Modal de confirmação customizado para exclusão de contatos.
-- Inputs de redes sociais padronizados visualmente.
-- Responsividade aprimorada em todas as telas.
-
-### ⚙️ Configurações Avançadas
-
-- Edição visual dos menus do painel (nome, ícone, ordem).
-- Personalização de cores e modo encolhido da barra lateral.
-- Seletor visual de ícones Bootstrap.
+- Senhas criptografadas com bcrypt
+- Validação de sessões
+- Proteção contra acesso não autorizado
+- Sanitização de dados
+- Headers de segurança
 
 ## 📝 Alterações Recentes
 
-- Ajuste do timezone do último login conforme configuração do painel.
-- Coluna "Último Login" agora sempre mostra o horário correto.
-- Tabela de usuários mais larga, centralizada e com espaçamento melhorado.
-- Botões de ação (Editar, Excluir, Desconectar) padronizados, menores e alinhados.
-- Botão "Desconectar" roxo, com largura e altura igual aos demais.
-- Ações agrupadas horizontalmente, sem espaço extra.
-- Dados da tabela centralizados e alinhados para melhor leitura.
+- Corrigido o encolhimento da barra lateral: agora a classe `shrink` é aplicada corretamente na `<div class="sidebar">` em todas as páginas do painel.
+- Menu "Configurações" restaurado e garantido que aparece corretamente, mesmo com a sidebar encolhida.
+- Ajustada a ordem e os IDs dos menus no `painel_config.json` para evitar sumiço de menus e garantir navegação correta.
+- Sidebar agora funciona de forma consistente em todas as páginas do painel.
+
+## 👨‍💻 Desenvolvimento
+
+### Estrutura de Dados
+
+- **usuarios.json**: Armazena usuários e senhas criptografadas
+- **whatsapp.json**: Contatos recebidos via formulário
+- **painel_config.json**: Configurações do painel administrativo
+- **site_config.json**: Configurações do site principal
+- **especialidades_config.json**: Configurações de especialidades
+
+### Arquivos Principais
+
+- **painel.php**: Dashboard principal
+- **registros.php**: Gerenciamento de contatos
+- **configuracoes.php**: Configurações do sistema
+- **index.php**: Site principal com formulário de contato
+
+## 📞 Suporte
+
+Para suporte técnico ou dúvidas sobre o sistema, entre em contato através do painel administrativo.
 
 ---
 
-**Desenvolvido com segurança, integração e experiência moderna!** 🚀
+**Desenvolvido com ❤️ por Alexandro F. S. Martins - 2025**
