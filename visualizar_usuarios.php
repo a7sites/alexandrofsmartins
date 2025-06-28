@@ -76,17 +76,20 @@ $config['menus'] = $novo_menus;
          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
          overflow: hidden;
          margin-bottom: 2rem;
+         width: 100%;
       }
 
       .table-container {
          overflow-x: auto;
-         max-width: 100%;
+         width: 100%;
+         -webkit-overflow-scrolling: touch;
       }
 
       .users-table table {
          width: 100%;
          border-collapse: collapse;
-         min-width: 800px;
+         min-width: 900px;
+         table-layout: fixed;
       }
 
       .users-table th,
@@ -95,13 +98,56 @@ $config['menus'] = $novo_menus;
          text-align: left;
          border-bottom: 1px solid #e1e5e9;
          vertical-align: middle;
+         word-wrap: break-word;
+         overflow: hidden;
       }
+
+      /* Definir larguras das colunas */
+      .users-table th:nth-child(1),
+      .users-table td:nth-child(1) {
+         width: 80px;
+      }
+
+      /* Avatar */
+      .users-table th:nth-child(2),
+      .users-table td:nth-child(2) {
+         width: 20%;
+      }
+
+      /* Nome */
+      .users-table th:nth-child(3),
+      .users-table td:nth-child(3) {
+         width: 15%;
+      }
+
+      /* Usuário */
+      .users-table th:nth-child(4),
+      .users-table td:nth-child(4) {
+         width: 25%;
+      }
+
+      /* Email */
+      .users-table th:nth-child(5),
+      .users-table td:nth-child(5) {
+         width: 15%;
+      }
+
+      /* Último Login */
+      .users-table th:nth-child(6),
+      .users-table td:nth-child(6) {
+         width: 25%;
+      }
+
+      /* Ações */
 
       .users-table th {
          background: #f8f9fa;
          font-weight: 600;
          color: #333;
          font-size: 0.95rem;
+         position: sticky;
+         top: 0;
+         z-index: 10;
       }
 
       .users-table tr:hover {
@@ -116,6 +162,7 @@ $config['menus'] = $novo_menus;
          display: flex;
          align-items: center;
          justify-content: center;
+         width: 100%;
       }
 
       .user-avatar img {
@@ -123,6 +170,21 @@ $config['menus'] = $novo_menus;
          height: 40px;
          border-radius: 50%;
          object-fit: cover;
+         flex-shrink: 0;
+      }
+
+      .user-name,
+      .user-username,
+      .user-email,
+      .user-login {
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
+         max-width: 0;
+      }
+
+      .user-actions {
+         min-width: 200px;
       }
 
       .acoes-btns {
@@ -131,6 +193,7 @@ $config['menus'] = $novo_menus;
          align-items: center;
          justify-content: flex-start;
          flex-wrap: wrap;
+         width: 100%;
       }
 
       .users-table .btn {
@@ -145,6 +208,7 @@ $config['menus'] = $novo_menus;
          white-space: nowrap;
          min-width: 80px;
          justify-content: center;
+         flex-shrink: 0;
       }
 
       .users-table .btn:hover {
@@ -173,7 +237,7 @@ $config['menus'] = $novo_menus;
       /* Responsividade para mobile */
       @media (max-width: 1024px) {
          .users-table table {
-            min-width: 700px;
+            min-width: 800px;
          }
 
          .users-table th,
@@ -200,7 +264,7 @@ $config['menus'] = $novo_menus;
          }
 
          .users-table table {
-            min-width: 600px;
+            min-width: 700px;
          }
 
          .users-table th,
@@ -213,6 +277,7 @@ $config['menus'] = $novo_menus;
             flex-direction: column;
             gap: 4px;
             align-items: stretch;
+            width: 100%;
          }
 
          .users-table .btn {
@@ -235,11 +300,42 @@ $config['menus'] = $novo_menus;
          .stats-card {
             margin-bottom: 1rem;
          }
+
+         /* Ajustar larguras das colunas no mobile */
+         .users-table th:nth-child(1),
+         .users-table td:nth-child(1) {
+            width: 60px;
+         }
+
+         .users-table th:nth-child(2),
+         .users-table td:nth-child(2) {
+            width: 18%;
+         }
+
+         .users-table th:nth-child(3),
+         .users-table td:nth-child(3) {
+            width: 15%;
+         }
+
+         .users-table th:nth-child(4),
+         .users-table td:nth-child(4) {
+            width: 22%;
+         }
+
+         .users-table th:nth-child(5),
+         .users-table td:nth-child(5) {
+            width: 15%;
+         }
+
+         .users-table th:nth-child(6),
+         .users-table td:nth-child(6) {
+            width: 30%;
+         }
       }
 
       @media (max-width: 480px) {
          .users-table table {
-            min-width: 500px;
+            min-width: 600px;
          }
 
          .users-table th,
@@ -261,12 +357,43 @@ $config['menus'] = $novo_menus;
          .content-container {
             padding: 10px;
          }
+
+         /* Ajustar larguras das colunas no mobile pequeno */
+         .users-table th:nth-child(1),
+         .users-table td:nth-child(1) {
+            width: 50px;
+         }
+
+         .users-table th:nth-child(2),
+         .users-table td:nth-child(2) {
+            width: 16%;
+         }
+
+         .users-table th:nth-child(3),
+         .users-table td:nth-child(3) {
+            width: 14%;
+         }
+
+         .users-table th:nth-child(4),
+         .users-table td:nth-child(4) {
+            width: 20%;
+         }
+
+         .users-table th:nth-child(5),
+         .users-table td:nth-child(5) {
+            width: 15%;
+         }
+
+         .users-table th:nth-child(6),
+         .users-table td:nth-child(6) {
+            width: 35%;
+         }
       }
 
       /* Melhorias para telas muito pequenas */
       @media (max-width: 360px) {
          .users-table table {
-            min-width: 450px;
+            min-width: 550px;
          }
 
          .users-table th,
@@ -283,6 +410,37 @@ $config['menus'] = $novo_menus;
          .user-avatar img {
             width: 25px;
             height: 25px;
+         }
+
+         /* Ajustar larguras das colunas no mobile muito pequeno */
+         .users-table th:nth-child(1),
+         .users-table td:nth-child(1) {
+            width: 40px;
+         }
+
+         .users-table th:nth-child(2),
+         .users-table td:nth-child(2) {
+            width: 15%;
+         }
+
+         .users-table th:nth-child(3),
+         .users-table td:nth-child(3) {
+            width: 13%;
+         }
+
+         .users-table th:nth-child(4),
+         .users-table td:nth-child(4) {
+            width: 18%;
+         }
+
+         .users-table th:nth-child(5),
+         .users-table td:nth-child(5) {
+            width: 14%;
+         }
+
+         .users-table th:nth-child(6),
+         .users-table td:nth-child(6) {
+            width: 40%;
          }
       }
    </style>
@@ -383,14 +541,14 @@ $config['menus'] = $novo_menus;
                                  <tr>
                                     <td>
                                        <div class="user-avatar">
-                                          <img src="imgs/img_perfil.jpeg" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;">
+                                          <img src="imgs/img_perfil.jpeg" alt="Avatar">
                                        </div>
                                     </td>
-                                    <td><?php echo htmlspecialchars($usuario['nome']); ?></td>
-                                    <td><?php echo htmlspecialchars($usuario['usuario']); ?></td>
-                                    <td><?php echo htmlspecialchars($usuario['email']); ?></td>
-                                    <td><?php echo htmlspecialchars($usuario['ultimo_login'] ?? 'Nunca'); ?></td>
-                                    <td>
+                                    <td class="user-name"><?php echo htmlspecialchars($usuario['nome']); ?></td>
+                                    <td class="user-username"><?php echo htmlspecialchars($usuario['usuario']); ?></td>
+                                    <td class="user-email"><?php echo htmlspecialchars($usuario['email']); ?></td>
+                                    <td class="user-login"><?php echo htmlspecialchars($usuario['ultimo_login'] ?? 'Nunca'); ?></td>
+                                    <td class="user-actions">
                                        <div class="acoes-btns">
                                           <a href="editar_usuario.php?id=<?php echo $index; ?>" class="btn btn-secondary">
                                              <i class="fas fa-edit"></i> Editar
