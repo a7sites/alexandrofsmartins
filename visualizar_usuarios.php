@@ -71,99 +71,219 @@ $config['menus'] = $novo_menus;
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
    <style>
       .users-table {
-         max-width: 100vw;
-         min-width: 1100px;
+         background: white;
+         border-radius: 10px;
+         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+         overflow: hidden;
+         margin-bottom: 2rem;
+      }
+
+      .table-container {
          overflow-x: auto;
+         max-width: 100%;
       }
 
       .users-table table {
-         width: 100% !important;
-         table-layout: auto !important;
-         min-width: 1000px;
+         width: 100%;
+         border-collapse: collapse;
+         min-width: 800px;
       }
 
       .users-table th,
       .users-table td {
-         padding: 10px 12px !important;
-         font-size: 0.97rem;
-         white-space: nowrap;
-         vertical-align: middle !important;
+         padding: 12px 15px;
+         text-align: left;
+         border-bottom: 1px solid #e1e5e9;
+         vertical-align: middle;
       }
 
       .users-table th {
-         text-align: left;
+         background: #f8f9fa;
+         font-weight: 600;
+         color: #333;
+         font-size: 0.95rem;
       }
 
-      .users-table td {
-         text-align: left;
+      .users-table tr:hover {
+         background: #f8f9fa;
       }
 
-      .users-table td .user-avatar {
+      .users-table tr:last-child td {
+         border-bottom: none;
+      }
+
+      .user-avatar {
          display: flex;
          align-items: center;
          justify-content: center;
-         margin: 0 auto;
       }
 
-      .users-table td:last-child {
-         text-align: center;
-         padding-top: 0 !important;
-         padding-bottom: 0 !important;
+      .user-avatar img {
+         width: 40px;
+         height: 40px;
+         border-radius: 50%;
+         object-fit: cover;
       }
 
-      .users-table .acoes-btns {
+      .acoes-btns {
          display: flex;
-         flex-direction: row;
-         gap: 6px;
-         justify-content: flex-start;
+         gap: 8px;
          align-items: center;
-         margin: 0;
-         padding: 0;
-         height: 36px;
+         justify-content: flex-start;
+         flex-wrap: wrap;
       }
 
-      @media (max-width: 900px) {
-         .users-table .acoes-btns {
-            flex-direction: column;
-            align-items: stretch;
-            justify-content: flex-start;
-            gap: 4px;
-         }
-      }
-
-      .users-table .btn,
-      .users-table .btn-roxo {
-         width: 100px;
-         min-width: 100px;
-         max-width: 100px;
-         height: 36px;
-         padding: 0;
-         font-size: 0.93rem;
-         border-radius: 4px;
-         margin-bottom: 0;
-         text-align: center;
-         display: inline-block;
-         line-height: 36px;
-         vertical-align: middle;
+      .users-table .btn {
+         padding: 8px 12px;
+         font-size: 0.9rem;
+         border-radius: 6px;
+         text-decoration: none;
+         display: inline-flex;
+         align-items: center;
+         gap: 5px;
+         transition: all 0.2s;
          white-space: nowrap;
-         overflow: hidden;
-         text-overflow: ellipsis;
+         min-width: 80px;
+         justify-content: center;
+      }
+
+      .users-table .btn:hover {
+         transform: translateY(-1px);
+         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
       }
 
       .users-table .btn-danger {
          background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
-         color: #fff;
+         color: white;
+         border: none;
       }
 
       .users-table .btn-secondary {
          background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
-         color: #fff;
+         color: white;
+         border: none;
       }
 
       .users-table .btn-roxo {
          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-         color: #fff;
+         color: white;
          border: none;
+      }
+
+      /* Responsividade para mobile */
+      @media (max-width: 1024px) {
+         .users-table table {
+            min-width: 700px;
+         }
+
+         .users-table th,
+         .users-table td {
+            padding: 10px 12px;
+            font-size: 0.9rem;
+         }
+
+         .users-table .btn {
+            padding: 6px 10px;
+            font-size: 0.85rem;
+            min-width: 70px;
+         }
+      }
+
+      @media (max-width: 768px) {
+         .users-table {
+            margin: 0 -15px;
+            border-radius: 0;
+         }
+
+         .table-container {
+            margin: 0 -15px;
+         }
+
+         .users-table table {
+            min-width: 600px;
+         }
+
+         .users-table th,
+         .users-table td {
+            padding: 8px 10px;
+            font-size: 0.85rem;
+         }
+
+         .acoes-btns {
+            flex-direction: column;
+            gap: 4px;
+            align-items: stretch;
+         }
+
+         .users-table .btn {
+            width: 100%;
+            padding: 8px;
+            font-size: 0.8rem;
+            min-width: auto;
+            justify-content: center;
+         }
+
+         .user-avatar img {
+            width: 35px;
+            height: 35px;
+         }
+
+         .content-container {
+            padding: 15px;
+         }
+
+         .stats-card {
+            margin-bottom: 1rem;
+         }
+      }
+
+      @media (max-width: 480px) {
+         .users-table table {
+            min-width: 500px;
+         }
+
+         .users-table th,
+         .users-table td {
+            padding: 6px 8px;
+            font-size: 0.8rem;
+         }
+
+         .users-table .btn {
+            padding: 6px 8px;
+            font-size: 0.75rem;
+         }
+
+         .user-avatar img {
+            width: 30px;
+            height: 30px;
+         }
+
+         .content-container {
+            padding: 10px;
+         }
+      }
+
+      /* Melhorias para telas muito pequenas */
+      @media (max-width: 360px) {
+         .users-table table {
+            min-width: 450px;
+         }
+
+         .users-table th,
+         .users-table td {
+            padding: 5px 6px;
+            font-size: 0.75rem;
+         }
+
+         .users-table .btn {
+            padding: 5px 6px;
+            font-size: 0.7rem;
+         }
+
+         .user-avatar img {
+            width: 25px;
+            height: 25px;
+         }
       }
    </style>
 </head>
