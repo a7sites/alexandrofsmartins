@@ -184,6 +184,20 @@ $config['menus'] = $novo_menus;
    <div class="footer">
       <p>&copy; 2024 Painel Administrativo - Desenvolvido com segurança por Alexandro F. S. Martins</p>
    </div>
+
+   <script>
+      // Ajustar main-content quando sidebar está encolhida
+      document.addEventListener('DOMContentLoaded', function() {
+         const sidebar = document.querySelector('.sidebar');
+         const mainContent = document.querySelector('.main-content');
+
+         if (sidebar && mainContent) {
+            if (sidebar.classList.contains('shrink')) {
+               mainContent.classList.add('sidebar-shrink');
+            }
+         }
+      });
+   </script>
 </body>
 
 </html>

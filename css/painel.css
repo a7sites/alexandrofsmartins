@@ -126,6 +126,12 @@ body {
    flex: 1;
    margin-left: 250px;
    background: #f5f7fa;
+   transition: margin-left 0.3s ease;
+}
+
+/* Ajuste quando sidebar está encolhida */
+.main-content.sidebar-shrink {
+   margin-left: 70px;
 }
 
 /* Header do Conteúdo */

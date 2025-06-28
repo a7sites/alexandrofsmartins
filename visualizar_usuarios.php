@@ -171,7 +171,7 @@ $config['menus'] = $novo_menus;
 <body>
    <div class="admin-layout">
       <!-- Menu Lateral -->
-      <div class="sidebar" style="background: <?php echo htmlspecialchars($config['sidebar_color']); ?>;">
+      <div class="sidebar<?php echo !empty($config['shrink_sidebar']) ? ' shrink' : ''; ?>" style="background: <?php echo htmlspecialchars($config['sidebar_color']); ?>;">
          <div class="sidebar-header">
             <div class="profile-section">
                <div class="profile-photo">
@@ -297,6 +297,20 @@ $config['menus'] = $novo_menus;
          </div>
       </div>
    </div>
+
+   <script>
+      // Ajustar main-content quando sidebar está encolhida
+      document.addEventListener('DOMContentLoaded', function() {
+         const sidebar = document.querySelector('.sidebar');
+         const mainContent = document.querySelector('.main-content');
+
+         if (sidebar && mainContent) {
+            if (sidebar.classList.contains('shrink')) {
+               mainContent.classList.add('sidebar-shrink');
+            }
+         }
+      });
+   </script>
 </body>
 
 </html>

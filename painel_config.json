@@ -1,6 +1,6 @@
 {
     "titulo": "Painel A7 Sites",
-    "sidebar_color": "#180e20",
+    "sidebar_color": "#270830",
     "shrink_sidebar": false,
     "timezone": "America\/Sao_Paulo",
     "menus": [
@@ -41,7 +41,7 @@
         },
         {
             "id": "configuracoes",
-            "nome": "Configurações",
+            "nome": "Configura\u00e7\u00f5es",
             "icone": "fas fa-cog"
         },
         {

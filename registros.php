@@ -587,6 +587,18 @@ $config['menus'] = $novo_menus;
             fecharModal();
          }
       });
+
+      // Ajustar main-content quando sidebar está encolhida
+      document.addEventListener('DOMContentLoaded', function() {
+         const sidebar = document.querySelector('.sidebar');
+         const mainContent = document.querySelector('.main-content');
+         
+         if (sidebar && mainContent) {
+            if (sidebar.classList.contains('shrink')) {
+               mainContent.classList.add('sidebar-shrink');
+            }
+         }
+      });
    </script>
 </body>
 

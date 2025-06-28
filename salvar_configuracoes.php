@@ -14,12 +14,13 @@ $default_config = [
    'shrink_sidebar' => false,
    'timezone' => 'America/Sao_Paulo',
    'menus' => [
-      ['id' => 'dashboard', 'nome' => 'Dashboard', 'icone' => 'fas fa-tachometer-alt'],
+      ['id' => 'dashboard', 'nome' => 'Dashboard', 'icone' => 'fas fa-home'],
       ['id' => 'perfil', 'nome' => 'Meu Perfil', 'icone' => 'fas fa-user'],
+      ['id' => 'registros', 'nome' => 'Registros', 'icone' => 'fas fa-phone'],
       ['id' => 'editar_site', 'nome' => 'Editar Site', 'icone' => 'fas fa-edit'],
       ['id' => 'cadastrar', 'nome' => 'Cadastrar Usuário', 'icone' => 'fas fa-user-plus'],
       ['id' => 'usuarios', 'nome' => 'Ver Usuários', 'icone' => 'fas fa-users'],
-      ['id' => 'ver_site', 'nome' => 'Ver Site', 'icone' => 'fas fa-home'],
+      ['id' => 'ver_site', 'nome' => 'Ver Site', 'icone' => 'bi-browser-chrome'],
       ['id' => 'configuracoes', 'nome' => 'Configurações', 'icone' => 'fas fa-cog'],
       ['id' => 'sair', 'nome' => 'Sair', 'icone' => 'fas fa-sign-out-alt'],
    ]

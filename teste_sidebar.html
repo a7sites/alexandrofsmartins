@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Teste Sidebar</title>
+   <link rel="stylesheet" href="css/painel.css">
+   <style>
+      /* Teste específico */
+      .teste-sidebar {
+         width: 250px;
+         background: #270830;
+         height: 100vh;
+         position: fixed;
+         left: 0;
+         top: 0;
+         transition: width 0.3s;
+      }
+      .teste-sidebar.shrink {
+         width: 70px;
+      }
+      .teste-content {
+         margin-left: 250px;
+         padding: 20px;
+         transition: margin-left 0.3s;
+         background: #f5f7fa;
+         min-height: 100vh;
+      }
+      .teste-content.sidebar-shrink {
+         margin-left: 70px;
+      }
+      .btn-teste {
+         padding: 10px 20px;
+         background: #667eea;
+         color: white;
+         border: none;
+         border-radius: 5px;
+         cursor: pointer;
+         margin: 10px;
+      }
+   </style>
+</head>
+<body>
+   <div class="teste-sidebar" id="sidebar">
+      <div style="padding: 20px; color: white;">
+         <h3>Sidebar</h3>
+         <p>Conteúdo da sidebar</p>
+      </div>
+   </div>
+   
+   <div class="teste-content" id="content">
+      <h1>Teste de Sidebar</h1>
+      <p>Este é um teste para verificar se o espaçamento está funcionando corretamente.</p>
+      
+      <button class="btn-teste" onclick="toggleSidebar()">Alternar Sidebar</button>
+      
+      <div style="background: white; padding: 20px; border-radius: 10px; margin-top: 20px;">
+         <h2>Conteúdo de Teste</h2>
+         <p>Este conteúdo deve se ajustar quando a sidebar encolher.</p>
+         <p>Margin-left atual: <span id="margin-info">250px</span></p>
+      </div>
+   </div>
+
+   <script>
+      function toggleSidebar() {
+         const sidebar = document.getElementById('sidebar');
+         const content = document.getElementById('content');
+         const marginInfo = document.getElementById('margin-info');
+         
+         sidebar.classList.toggle('shrink');
+         content.classList.toggle('sidebar-shrink');
+         
+         const currentMargin = content.classList.contains('sidebar-shrink') ? '70px' : '250px';
+         marginInfo.textContent = currentMargin;
+      }
+   </script>
+</body>
+</html> 

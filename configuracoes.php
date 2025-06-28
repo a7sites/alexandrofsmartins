@@ -246,6 +246,18 @@ $config['menus'] = $novo_menus;
          input.value = icone;
          elemento.nextElementSibling.nextElementSibling.classList.remove('show');
       }
+
+      // Ajustar main-content quando sidebar está encolhida
+      document.addEventListener('DOMContentLoaded', function() {
+         const sidebar = document.querySelector('.sidebar');
+         const mainContent = document.querySelector('.main-content');
+
+         if (sidebar && mainContent) {
+            if (sidebar.classList.contains('shrink')) {
+               mainContent.classList.add('sidebar-shrink');
+            }
+         }
+      });
    </script>
 </body>
 

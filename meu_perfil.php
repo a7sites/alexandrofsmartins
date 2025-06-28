@@ -116,7 +116,7 @@ $error = $_GET['error'] ?? '';
 <body>
    <div class="admin-layout">
       <!-- Menu Lateral -->
-      <div class="sidebar" style="background: <?php echo htmlspecialchars($config['sidebar_color']); ?>;">
+      <div class="sidebar<?php echo !empty($config['shrink_sidebar']) ? ' shrink' : ''; ?>" style="background: <?php echo htmlspecialchars($config['sidebar_color']); ?>;">
          <div class="sidebar-header">
             <div class="profile-section">
                <div class="profile-photo">
@@ -315,6 +315,20 @@ $error = $_GET['error'] ?? '';
          if (v.length > 10) v = v.slice(0, 10) + '-' + v.slice(10);
          else if (v.length > 6) v = v.slice(0, 9) + '-' + v.slice(9);
          this.value = v;
+      });
+   </script>
+
+   <script>
+      // Ajustar main-content quando sidebar está encolhida
+      document.addEventListener('DOMContentLoaded', function() {
+         const sidebar = document.querySelector('.sidebar');
+         const mainContent = document.querySelector('.main-content');
+
+         if (sidebar && mainContent) {
+            if (sidebar.classList.contains('shrink')) {
+               mainContent.classList.add('sidebar-shrink');
+            }
+         }
       });
    </script>
 </body>

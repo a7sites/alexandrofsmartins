@@ -107,7 +107,7 @@ $error = $_GET['error'] ?? '';
 <body>
    <div class="admin-layout">
       <!-- Menu Lateral -->
-      <div class="sidebar" style="background: <?php echo htmlspecialchars($config_painel['sidebar_color']); ?>;">
+      <div class="sidebar<?php echo !empty($config_painel['shrink_sidebar']) ? ' shrink' : ''; ?>" style="background: <?php echo htmlspecialchars($config_painel['sidebar_color']); ?>;">
          <div class="sidebar-header">
             <div class="profile-section">
                <div class="profile-photo">
@@ -551,6 +551,20 @@ $error = $_GET['error'] ?? '';
          });
       }
       window.addEventListener('DOMContentLoaded', initVanillaPicker);
+   </script>
+
+   <script>
+      // Ajustar main-content quando sidebar está encolhida
+      document.addEventListener('DOMContentLoaded', function() {
+         const sidebar = document.querySelector('.sidebar');
+         const mainContent = document.querySelector('.main-content');
+
+         if (sidebar && mainContent) {
+            if (sidebar.classList.contains('shrink')) {
+               mainContent.classList.add('sidebar-shrink');
+            }
+         }
+      });
    </script>
 </body>
 
