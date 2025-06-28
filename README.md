@@ -121,7 +121,7 @@ Para atualizar o sistema:
 3. Mantenha o arquivo `usuarios.json` existente
 4. Teste todas as funcionalidades
 
-## 🆕 Novas Funcionalidades (2025)
+## 🆕 Novas Funcionalidades (2024)
 
 ### 📱 Registros de Contatos WhatsApp
 

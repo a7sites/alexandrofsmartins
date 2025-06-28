@@ -1,17 +1,5 @@
 console.log('JS carregado!');
 
-// Função para toggle do menu mobile
-function toggleMenu() {
-   const menu = document.getElementById('menu_header');
-   menu.classList.toggle('active');
-}
-
-// Fechar menu mobile ao clicar em um link
-function fecharMenu() {
-   const menu = document.getElementById('menu_header');
-   menu.classList.remove('active');
-}
-
 function enviarWhatsapp(event) {
   event.preventDefault();
 
@@ -81,24 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const btnFaleComigo = document.querySelector('.btn_falecomigo');
   if(btnFaleComigo) btnFaleComigo.classList.add('bounce-in');
-
-  // Fechar menu mobile ao clicar em links do menu
-  const menuLinks = document.querySelectorAll('.menu_header a');
-  menuLinks.forEach(link => {
-    link.addEventListener('click', fecharMenu);
-  });
-
-  // Fechar menu mobile ao clicar fora dele
-  document.addEventListener('click', (e) => {
-    const menu = document.getElementById('menu_header');
-    const menuBtn = document.querySelector('.menu_mobile_btn');
-    
-    if (menu && menu.classList.contains('active') && 
-        !menu.contains(e.target) && 
-        !menuBtn.contains(e.target)) {
-      fecharMenu();
-    }
-  });
 
   // Função de debounce para reduzir chamadas excessivas
 function debounce(func, delay) {

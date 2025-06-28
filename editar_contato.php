@@ -84,3 +84,4 @@ if (file_put_contents($contatos_file, json_encode($contatos, JSON_PRETTY_PRINT |
    echo json_encode(['success' => false, 'message' => 'Erro ao atualizar contato']);
    exit;
 }
+ 

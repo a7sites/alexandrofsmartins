@@ -57,3 +57,4 @@ if (file_put_contents($contatos_file, json_encode($contatos, JSON_PRETTY_PRINT |
    http_response_code(500);
    echo json_encode(['success' => false, 'message' => 'Erro ao excluir contato']);
 }
+ 

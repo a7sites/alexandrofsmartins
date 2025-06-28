@@ -1,11 +1,18 @@
 <?php
 session_start();
 
+// Debug temporário - remover depois
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Verifica se está logado
 if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
    header('Location: admin.php');
    exit;
 }
+
+// Debug - verificar se chegou até aqui
+echo "<!-- Debug: Arquivo registros.php carregado com sucesso -->";
 
 // Carregar configurações do painel
 $config_file = 'painel_config.json';
@@ -30,6 +37,9 @@ $config = $default_config;
 if (file_exists($config_file)) {
    $config = json_decode(file_get_contents($config_file), true) ?? $default_config;
 }
+
+// Debug - verificar se config foi carregada
+echo "<!-- Debug: Config carregada: " . ($config ? 'SIM' : 'NÃO') . " -->";
 
 // Definir timezone do painel
 if (!empty($config['timezone'])) {
@@ -243,7 +253,7 @@ $config['menus'] = $novo_menus;
 <body>
    <div class="admin-layout">
       <!-- Menu Lateral -->
-      <div class="sidebar" style="background: <?php echo htmlspecialchars($config['sidebar_color']); ?>;">
+      <div class="sidebar<?php echo !empty($config['shrink_sidebar']) ? ' shrink' : ''; ?>" style="background: <?php echo htmlspecialchars($config['sidebar_color']); ?>;">
          <div class="sidebar-header">
             <div class="profile-section">
                <div class="profile-photo">
@@ -291,11 +301,6 @@ $config['menus'] = $novo_menus;
 
       <!-- Conteúdo Principal -->
       <div class="main-content">
-         <!-- Botão mobile para menu -->
-         <div class="mobile-menu-btn" onclick="toggleSidebar()">
-            <i class="fas fa-bars"></i>
-         </div>
-
          <div class="content-header">
             <h2>📞 Registros de Contatos WhatsApp</h2>
          </div>
@@ -399,32 +404,6 @@ $config['menus'] = $novo_menus;
                </div>
             <?php endif; ?>
          </div>
-      </div>
-   </div>
-
-   <!-- Modal de Edição -->
-   <div id="editModal" class="modal" style="display: none;">
-      <div class="modal-content">
-         <span class="close" onclick="fecharModal()">&times;</span>
-         <h3>Editar Contato</h3>
-         <form id="editForm">
-            <div class="form-group">
-               <label for="editNome">Nome:</label>
-               <input type="text" id="editNome" name="nome" required>
-            </div>
-            <div class="form-group">
-               <label for="editWhatsapp">WhatsApp:</label>
-               <input type="text" id="editWhatsapp" name="whatsapp" required>
-            </div>
-            <div class="form-group">
-               <label for="editMensagem">Mensagem:</label>
-               <textarea id="editMensagem" name="mensagem" required></textarea>
-            </div>
-            <div class="btn-group">
-               <button type="submit" class="btn">Salvar</button>
-               <button type="button" class="btn btn-secondary" onclick="fecharModal()">Cancelar</button>
-            </div>
-         </form>
       </div>
    </div>
 
@@ -607,33 +586,6 @@ $config['menus'] = $novo_menus;
          if (modal && event.target === modal) {
             fecharModal();
          }
-      });
-
-      function toggleSidebar() {
-         const sidebar = document.querySelector('.sidebar');
-         sidebar.classList.toggle('open');
-      }
-
-      // Fechar sidebar ao clicar fora dela em mobile
-      document.addEventListener('click', function(e) {
-         const sidebar = document.querySelector('.sidebar');
-         const mobileBtn = document.querySelector('.mobile-menu-btn');
-
-         if (window.innerWidth <= 768 &&
-            sidebar.classList.contains('open') &&
-            !sidebar.contains(e.target) &&
-            !mobileBtn.contains(e.target)) {
-            sidebar.classList.remove('open');
-         }
-      });
-
-      // Fechar sidebar ao clicar em links do menu em mobile
-      document.querySelectorAll('.menu-item').forEach(link => {
-         link.addEventListener('click', function() {
-            if (window.innerWidth <= 768) {
-               document.querySelector('.sidebar').classList.remove('open');
-            }
-         });
       });
    </script>
 </body>

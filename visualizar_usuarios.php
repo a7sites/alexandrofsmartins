@@ -71,377 +71,99 @@ $config['menus'] = $novo_menus;
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
    <style>
       .users-table {
-         background: white;
-         border-radius: 10px;
-         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-         overflow: hidden;
-         margin-bottom: 2rem;
-         width: 100%;
-      }
-
-      .table-container {
+         max-width: 100vw;
+         min-width: 1100px;
          overflow-x: auto;
-         width: 100%;
-         -webkit-overflow-scrolling: touch;
       }
 
       .users-table table {
-         width: 100%;
-         border-collapse: collapse;
-         min-width: 900px;
-         table-layout: fixed;
+         width: 100% !important;
+         table-layout: auto !important;
+         min-width: 1000px;
       }
 
       .users-table th,
       .users-table td {
-         padding: 12px 15px;
-         text-align: left;
-         border-bottom: 1px solid #e1e5e9;
-         vertical-align: middle;
-         word-wrap: break-word;
-         overflow: hidden;
+         padding: 10px 12px !important;
+         font-size: 0.97rem;
+         white-space: nowrap;
+         vertical-align: middle !important;
       }
-
-      /* Definir larguras das colunas */
-      .users-table th:nth-child(1),
-      .users-table td:nth-child(1) {
-         width: 80px;
-      }
-
-      /* Avatar */
-      .users-table th:nth-child(2),
-      .users-table td:nth-child(2) {
-         width: 20%;
-      }
-
-      /* Nome */
-      .users-table th:nth-child(3),
-      .users-table td:nth-child(3) {
-         width: 15%;
-      }
-
-      /* Usuário */
-      .users-table th:nth-child(4),
-      .users-table td:nth-child(4) {
-         width: 25%;
-      }
-
-      /* Email */
-      .users-table th:nth-child(5),
-      .users-table td:nth-child(5) {
-         width: 15%;
-      }
-
-      /* Último Login */
-      .users-table th:nth-child(6),
-      .users-table td:nth-child(6) {
-         width: 25%;
-      }
-
-      /* Ações */
 
       .users-table th {
-         background: #f8f9fa;
-         font-weight: 600;
-         color: #333;
-         font-size: 0.95rem;
-         position: sticky;
-         top: 0;
-         z-index: 10;
+         text-align: left;
       }
 
-      .users-table tr:hover {
-         background: #f8f9fa;
+      .users-table td {
+         text-align: left;
       }
 
-      .users-table tr:last-child td {
-         border-bottom: none;
-      }
-
-      .user-avatar {
+      .users-table td .user-avatar {
          display: flex;
          align-items: center;
          justify-content: center;
-         width: 100%;
+         margin: 0 auto;
       }
 
-      .user-avatar img {
-         width: 40px;
-         height: 40px;
-         border-radius: 50%;
-         object-fit: cover;
-         flex-shrink: 0;
+      .users-table td:last-child {
+         text-align: center;
+         padding-top: 0 !important;
+         padding-bottom: 0 !important;
       }
 
-      .user-name,
-      .user-username,
-      .user-email,
-      .user-login {
+      .users-table .acoes-btns {
+         display: flex;
+         flex-direction: row;
+         gap: 6px;
+         justify-content: flex-start;
+         align-items: center;
+         margin: 0;
+         padding: 0;
+         height: 36px;
+      }
+
+      @media (max-width: 900px) {
+         .users-table .acoes-btns {
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
+            gap: 4px;
+         }
+      }
+
+      .users-table .btn,
+      .users-table .btn-roxo {
+         width: 100px;
+         min-width: 100px;
+         max-width: 100px;
+         height: 36px;
+         padding: 0;
+         font-size: 0.93rem;
+         border-radius: 4px;
+         margin-bottom: 0;
+         text-align: center;
+         display: inline-block;
+         line-height: 36px;
+         vertical-align: middle;
          white-space: nowrap;
          overflow: hidden;
          text-overflow: ellipsis;
-         max-width: 0;
-      }
-
-      .user-actions {
-         min-width: 200px;
-      }
-
-      .acoes-btns {
-         display: flex;
-         gap: 8px;
-         align-items: center;
-         justify-content: flex-start;
-         flex-wrap: wrap;
-         width: 100%;
-      }
-
-      .users-table .btn {
-         padding: 8px 12px;
-         font-size: 0.9rem;
-         border-radius: 6px;
-         text-decoration: none;
-         display: inline-flex;
-         align-items: center;
-         gap: 5px;
-         transition: all 0.2s;
-         white-space: nowrap;
-         min-width: 80px;
-         justify-content: center;
-         flex-shrink: 0;
-      }
-
-      .users-table .btn:hover {
-         transform: translateY(-1px);
-         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
       }
 
       .users-table .btn-danger {
          background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
-         color: white;
-         border: none;
+         color: #fff;
       }
 
       .users-table .btn-secondary {
          background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
-         color: white;
-         border: none;
+         color: #fff;
       }
 
       .users-table .btn-roxo {
          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-         color: white;
+         color: #fff;
          border: none;
-      }
-
-      /* Responsividade para mobile */
-      @media (max-width: 1024px) {
-         .users-table table {
-            min-width: 800px;
-         }
-
-         .users-table th,
-         .users-table td {
-            padding: 10px 12px;
-            font-size: 0.9rem;
-         }
-
-         .users-table .btn {
-            padding: 6px 10px;
-            font-size: 0.85rem;
-            min-width: 70px;
-         }
-      }
-
-      @media (max-width: 768px) {
-         .users-table {
-            margin: 0 -15px;
-            border-radius: 0;
-         }
-
-         .table-container {
-            margin: 0 -15px;
-         }
-
-         .users-table table {
-            min-width: 700px;
-         }
-
-         .users-table th,
-         .users-table td {
-            padding: 8px 10px;
-            font-size: 0.85rem;
-         }
-
-         .acoes-btns {
-            flex-direction: column;
-            gap: 4px;
-            align-items: stretch;
-            width: 100%;
-         }
-
-         .users-table .btn {
-            width: 100%;
-            padding: 8px;
-            font-size: 0.8rem;
-            min-width: auto;
-            justify-content: center;
-         }
-
-         .user-avatar img {
-            width: 35px;
-            height: 35px;
-         }
-
-         .content-container {
-            padding: 15px;
-         }
-
-         .stats-card {
-            margin-bottom: 1rem;
-         }
-
-         /* Ajustar larguras das colunas no mobile */
-         .users-table th:nth-child(1),
-         .users-table td:nth-child(1) {
-            width: 60px;
-         }
-
-         .users-table th:nth-child(2),
-         .users-table td:nth-child(2) {
-            width: 18%;
-         }
-
-         .users-table th:nth-child(3),
-         .users-table td:nth-child(3) {
-            width: 15%;
-         }
-
-         .users-table th:nth-child(4),
-         .users-table td:nth-child(4) {
-            width: 22%;
-         }
-
-         .users-table th:nth-child(5),
-         .users-table td:nth-child(5) {
-            width: 15%;
-         }
-
-         .users-table th:nth-child(6),
-         .users-table td:nth-child(6) {
-            width: 30%;
-         }
-      }
-
-      @media (max-width: 480px) {
-         .users-table table {
-            min-width: 600px;
-         }
-
-         .users-table th,
-         .users-table td {
-            padding: 6px 8px;
-            font-size: 0.8rem;
-         }
-
-         .users-table .btn {
-            padding: 6px 8px;
-            font-size: 0.75rem;
-         }
-
-         .user-avatar img {
-            width: 30px;
-            height: 30px;
-         }
-
-         .content-container {
-            padding: 10px;
-         }
-
-         /* Ajustar larguras das colunas no mobile pequeno */
-         .users-table th:nth-child(1),
-         .users-table td:nth-child(1) {
-            width: 50px;
-         }
-
-         .users-table th:nth-child(2),
-         .users-table td:nth-child(2) {
-            width: 16%;
-         }
-
-         .users-table th:nth-child(3),
-         .users-table td:nth-child(3) {
-            width: 14%;
-         }
-
-         .users-table th:nth-child(4),
-         .users-table td:nth-child(4) {
-            width: 20%;
-         }
-
-         .users-table th:nth-child(5),
-         .users-table td:nth-child(5) {
-            width: 15%;
-         }
-
-         .users-table th:nth-child(6),
-         .users-table td:nth-child(6) {
-            width: 35%;
-         }
-      }
-
-      /* Melhorias para telas muito pequenas */
-      @media (max-width: 360px) {
-         .users-table table {
-            min-width: 550px;
-         }
-
-         .users-table th,
-         .users-table td {
-            padding: 5px 6px;
-            font-size: 0.75rem;
-         }
-
-         .users-table .btn {
-            padding: 5px 6px;
-            font-size: 0.7rem;
-         }
-
-         .user-avatar img {
-            width: 25px;
-            height: 25px;
-         }
-
-         /* Ajustar larguras das colunas no mobile muito pequeno */
-         .users-table th:nth-child(1),
-         .users-table td:nth-child(1) {
-            width: 40px;
-         }
-
-         .users-table th:nth-child(2),
-         .users-table td:nth-child(2) {
-            width: 15%;
-         }
-
-         .users-table th:nth-child(3),
-         .users-table td:nth-child(3) {
-            width: 13%;
-         }
-
-         .users-table th:nth-child(4),
-         .users-table td:nth-child(4) {
-            width: 18%;
-         }
-
-         .users-table th:nth-child(5),
-         .users-table td:nth-child(5) {
-            width: 14%;
-         }
-
-         .users-table th:nth-child(6),
-         .users-table td:nth-child(6) {
-            width: 40%;
-         }
       }
    </style>
 </head>
@@ -497,13 +219,8 @@ $config['menus'] = $novo_menus;
 
       <!-- Conteúdo Principal -->
       <div class="main-content">
-         <!-- Botão mobile para menu -->
-         <div class="mobile-menu-btn" onclick="toggleSidebar()">
-            <i class="fas fa-bars"></i>
-         </div>
-
          <div class="content-header">
-            <h2>👥 Gerenciar Usuários</h2>
+            <h2>Visualizar Usuários</h2>
          </div>
 
          <div class="content-container">
@@ -529,37 +246,39 @@ $config['menus'] = $novo_menus;
                            <thead>
                               <tr>
                                  <th>Avatar</th>
-                                 <th>Nome</th>
                                  <th>Usuário</th>
-                                 <th>Email</th>
+                                 <th>Nome</th>
+                                 <th>E-mail</th>
+                                 <th>Data de Criação</th>
                                  <th>Último Login</th>
                                  <th>Ações</th>
                               </tr>
                            </thead>
                            <tbody>
-                              <?php foreach ($usuarios as $index => $usuario): ?>
+                              <?php foreach ($usuarios as $usuario => $dados): ?>
                                  <tr>
                                     <td>
                                        <div class="user-avatar">
-                                          <img src="imgs/img_perfil.jpeg" alt="Avatar">
+                                          <?php echo strtoupper(substr($dados['nome'], 0, 1)); ?>
                                        </div>
                                     </td>
-                                    <td class="user-name"><?php echo htmlspecialchars($usuario['nome']); ?></td>
-                                    <td class="user-username"><?php echo htmlspecialchars($usuario['usuario']); ?></td>
-                                    <td class="user-email"><?php echo htmlspecialchars($usuario['email']); ?></td>
-                                    <td class="user-login"><?php echo htmlspecialchars($usuario['ultimo_login'] ?? 'Nunca'); ?></td>
-                                    <td class="user-actions">
+                                    <td><strong><?php echo htmlspecialchars($usuario); ?></strong></td>
+                                    <td><?php echo htmlspecialchars($dados['nome']); ?></td>
+                                    <td><?php echo htmlspecialchars($dados['email']); ?></td>
+                                    <td><?php echo date('d/m/Y H:i', strtotime($dados['data_criacao'])); ?></td>
+                                    <td><?php echo isset($dados['ultimo_login']) ? date('d/m/Y H:i', strtotime($dados['ultimo_login'])) : '<span style=\'color:#aaa\'>Nunca</span>'; ?></td>
+                                    <td>
                                        <div class="acoes-btns">
-                                          <a href="editar_usuario.php?id=<?php echo $index; ?>" class="btn btn-secondary">
-                                             <i class="fas fa-edit"></i> Editar
-                                          </a>
-                                          <a href="excluir_usuario.php?id=<?php echo $index; ?>" class="btn btn-danger"
-                                             onclick="return confirm('Tem certeza que deseja excluir este usuário?')">
-                                             <i class="fas fa-trash"></i> Excluir
-                                          </a>
-                                          <a href="desconectar_usuario.php?id=<?php echo $index; ?>" class="btn btn-roxo">
-                                             <i class="fas fa-sign-out-alt"></i> Desconectar
-                                          </a>
+                                          <a href="editar_usuario.php?usuario=<?php echo urlencode($usuario); ?>" class="btn btn-secondary">Editar</a>
+                                          <?php if ($usuario !== $_SESSION['usuario']): ?>
+                                             <a href="excluir_usuario.php?usuario=<?php echo urlencode($usuario); ?>" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este usuário?')">Excluir</a>
+                                             <form method="post" action="desconectar_usuario.php" style="display:inline;">
+                                                <input type="hidden" name="usuario" value="<?php echo htmlspecialchars($usuario); ?>">
+                                                <button type="submit" class="btn btn-roxo">Desconectar</button>
+                                             </form>
+                                          <?php else: ?>
+                                             <span style="color: #666; font-size: 0.9rem;">Usuário Atual</span>
+                                          <?php endif; ?>
                                        </div>
                                     </td>
                                  </tr>
@@ -578,35 +297,6 @@ $config['menus'] = $novo_menus;
          </div>
       </div>
    </div>
-
-   <script>
-      function toggleSidebar() {
-         const sidebar = document.querySelector('.sidebar');
-         sidebar.classList.toggle('open');
-      }
-
-      // Fechar sidebar ao clicar fora dela em mobile
-      document.addEventListener('click', function(e) {
-         const sidebar = document.querySelector('.sidebar');
-         const mobileBtn = document.querySelector('.mobile-menu-btn');
-
-         if (window.innerWidth <= 768 &&
-            sidebar.classList.contains('open') &&
-            !sidebar.contains(e.target) &&
-            !mobileBtn.contains(e.target)) {
-            sidebar.classList.remove('open');
-         }
-      });
-
-      // Fechar sidebar ao clicar em links do menu em mobile
-      document.querySelectorAll('.menu-item').forEach(link => {
-         link.addEventListener('click', function() {
-            if (window.innerWidth <= 768) {
-               document.querySelector('.sidebar').classList.remove('open');
-            }
-         });
-      });
-   </script>
 </body>
 
 </html>

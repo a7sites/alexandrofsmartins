@@ -164,11 +164,6 @@ $error = $_GET['error'] ?? '';
 
       <!-- Conteúdo Principal -->
       <div class="main-content">
-         <!-- Botão mobile para menu -->
-         <div class="mobile-menu-btn" onclick="toggleSidebar()">
-            <i class="fas fa-bars"></i>
-         </div>
-
          <div class="content-header">
             <h2>Meu Perfil</h2>
          </div>
@@ -275,33 +270,6 @@ $error = $_GET['error'] ?? '';
    </div>
 
    <script>
-      function toggleSidebar() {
-         const sidebar = document.querySelector('.sidebar');
-         sidebar.classList.toggle('open');
-      }
-
-      // Fechar sidebar ao clicar fora dela em mobile
-      document.addEventListener('click', function(e) {
-         const sidebar = document.querySelector('.sidebar');
-         const mobileBtn = document.querySelector('.mobile-menu-btn');
-
-         if (window.innerWidth <= 768 &&
-            sidebar.classList.contains('open') &&
-            !sidebar.contains(e.target) &&
-            !mobileBtn.contains(e.target)) {
-            sidebar.classList.remove('open');
-         }
-      });
-
-      // Fechar sidebar ao clicar em links do menu em mobile
-      document.querySelectorAll('.menu-item').forEach(link => {
-         link.addEventListener('click', function() {
-            if (window.innerWidth <= 768) {
-               document.querySelector('.sidebar').classList.remove('open');
-            }
-         });
-      });
-
       // Contador de caracteres para biografia
       document.getElementById('biografia').addEventListener('input', function() {
          const maxLength = 320;

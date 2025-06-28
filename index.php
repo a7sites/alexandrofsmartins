@@ -109,13 +109,7 @@ function hexToRgba($hex)
                <img class="logomarca" src="<?php echo htmlspecialchars($config['logomarca']); ?>" alt="Logomarca">
             </a>
          </div>
-
-         <!-- Botão do menu mobile -->
-         <div class="menu_mobile_btn" onclick="toggleMenu()">
-            <i class="bi bi-list"></i>
-         </div>
-
-         <div class="menu_header" id="menu_header">
+         <div class="menu_header">
             <ul>
                <?php foreach ($config['menu'] as $item): ?>
                   <li><a href="<?php echo htmlspecialchars($item['link']); ?>"><?php echo htmlspecialchars($item['nome']); ?></a></li>
