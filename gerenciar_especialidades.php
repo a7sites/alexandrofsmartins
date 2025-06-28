@@ -155,106 +155,113 @@ $error = $_GET['error'] ?? '';
 
       <!-- Conteúdo Principal -->
       <div class="main-content">
+         <!-- Botão mobile para menu -->
+         <div class="mobile-menu-btn" onclick="toggleSidebar()">
+            <i class="fas fa-bars"></i>
+         </div>
+
          <div class="content-header">
             <h2>Gerenciar Especialidades</h2>
          </div>
 
          <div class="content-container">
             <div class="container">
-               <?php if ($error): ?><div class="error-message"><?php echo htmlspecialchars($error); ?></div><?php endif; ?>
-               <?php if ($success): ?><div class="success-message"><?php echo htmlspecialchars($success); ?></div><?php endif; ?>
+               <div class="form-card">
+                  <h2>🎨 Gerenciar Especialidades</h2>
 
-               <form action="salvar_especialidades.php" method="POST" id="especialidadesForm">
-                  <div id="especialidades-container">
-                     <?php foreach ($especialidades as $index => $especialidade): ?>
-                        <div class="especialidade-card" data-index="<?php echo $index; ?>">
-                           <h3>
-                              Especialidade <?php echo $index + 1; ?>
-                              <button type="button" class="remove-especialidade" onclick="removerEspecialidade(this)">Remover</button>
-                           </h3>
+                  <?php if (isset($_GET['error'])): ?>
+                     <div class="error-message">
+                        <?php echo htmlspecialchars($_GET['error']); ?>
+                     </div>
+                  <?php endif; ?>
 
-                           <div class="form-row">
-                              <div class="form-group">
-                                 <label>Título:</label>
-                                 <input type="text" name="especialidades[<?php echo $index; ?>][titulo]" value="<?php echo htmlspecialchars($especialidade['titulo']); ?>" required>
-                              </div>
-                              <div class="form-group">
-                                 <label>Ícone:</label>
-                                 <div class="icon-selector">
-                                    <div class="icon-preview" onclick="abrirPopupIcone(this)">
-                                       <i class="<?php echo htmlspecialchars($especialidade['icone']); ?>" style="color: <?php echo htmlspecialchars($especialidade['cor_icone']); ?>;"></i>
-                                       <span><?php echo htmlspecialchars($especialidade['icone']); ?></span>
-                                    </div>
-                                    <input type="hidden" name="especialidades[<?php echo $index; ?>][icone]" value="<?php echo htmlspecialchars($especialidade['icone']); ?>">
-                                    <div class="icon-popup">
-                                       <div class="icon-grid">
-                                          <!-- Ícones Bootstrap serão inseridos via JavaScript -->
+                  <?php if (isset($_GET['success'])): ?>
+                     <div class="success-message">
+                        <?php echo htmlspecialchars($_GET['success']); ?>
+                     </div>
+                  <?php endif; ?>
+
+                  <form action="salvar_especialidades.php" method="POST">
+                     <div id="especialidades-container">
+                        <?php foreach ($especialidades as $index => $especialidade): ?>
+                           <div class="especialidade-card" data-index="<?php echo $index; ?>">
+                              <h3>Especialidade <?php echo $index + 1; ?></h3>
+
+                              <div class="form-row">
+                                 <div class="form-group">
+                                    <label for="titulo_<?php echo $index; ?>">Título:</label>
+                                    <input type="text" id="titulo_<?php echo $index; ?>" name="especialidades[<?php echo $index; ?>][titulo]" value="<?php echo htmlspecialchars($especialidade['titulo']); ?>" required>
+                                 </div>
+
+                                 <div class="form-group">
+                                    <label for="icone_<?php echo $index; ?>">Ícone:</label>
+                                    <div class="icon-selector">
+                                       <div class="icon-preview" onclick="abrirPopupIcone(this)">
+                                          <i class="<?php echo htmlspecialchars($especialidade['icone']); ?>"></i>
+                                       </div>
+                                       <input type="text" class="icon-input" name="especialidades[<?php echo $index; ?>][icone]" value="<?php echo htmlspecialchars($especialidade['icone']); ?>" readonly>
+                                       <div class="icon-popup">
+                                          <div class="icon-grid"></div>
                                        </div>
                                     </div>
                                  </div>
                               </div>
-                           </div>
 
-                           <div class="form-row-4">
-                              <div class="form-group">
-                                 <label>Cor do Ícone:</label>
-                                 <div class="color-picker">
-                                    <input type="text" class="color-input" name="especialidades[<?php echo $index; ?>][cor_icone]" value="<?php echo htmlspecialchars($especialidade['cor_icone']); ?>" onchange="atualizarPreview(this)">
+                              <div class="form-row">
+                                 <div class="form-group">
+                                    <label for="cor_icone_<?php echo $index; ?>">Cor do Ícone:</label>
+                                    <input type="color" id="cor_icone_<?php echo $index; ?>" name="especialidades[<?php echo $index; ?>][cor_icone]" value="<?php echo htmlspecialchars($especialidade['cor_icone']); ?>">
                                  </div>
-                              </div>
-                              <div class="form-group">
-                                 <label>Segunda Cor (Gradiente):</label>
-                                 <div class="color-picker">
-                                    <input type="text" class="color-input" name="especialidades[<?php echo $index; ?>][cor_gradiente]" value="<?php echo htmlspecialchars($especialidade['cor_gradiente'] ?? '#7c3aed'); ?>" onchange="atualizarPreview(this)">
-                                 </div>
-                              </div>
-                              <div class="form-group">
-                                 <label>Cor de Fundo:</label>
-                                 <div class="bg-color-picker">
-                                    <input type="text" class="color-input" name="especialidades[<?php echo $index; ?>][cor_fundo]" value="<?php echo htmlspecialchars($especialidade['cor_fundo']); ?>" onchange="atualizarPreview(this)">
-                                 </div>
-                              </div>
-                              <div class="form-group">
-                                 <label>Opções:</label>
-                                 <div class="gradient-toggle">
-                                    <span>Gradiente</span>
-                                    <input type="checkbox" name="especialidades[<?php echo $index; ?>][usar_gradiente]" <?php echo $especialidade['usar_gradiente'] ? 'checked' : ''; ?> onchange="toggleGradiente(this)">
-                                 </div>
-                                 <div class="blur-toggle">
-                                    <span>Blur</span>
-                                    <input type="checkbox" name="especialidades[<?php echo $index; ?>][usar_blur]" <?php echo $especialidade['usar_blur'] ? 'checked' : ''; ?> onchange="atualizarPreview(this)">
-                                 </div>
-                              </div>
-                           </div>
 
-                           <div class="descricao-container">
-                              <div class="descricao-field">
                                  <div class="form-group">
-                                    <label>Descrição:</label>
-                                    <textarea name="especialidades[<?php echo $index; ?>][descricao]" rows="4" required><?php echo htmlspecialchars($especialidade['descricao']); ?></textarea>
+                                    <label for="cor_gradiente_<?php echo $index; ?>">Cor do Gradiente:</label>
+                                    <input type="color" id="cor_gradiente_<?php echo $index; ?>" name="especialidades[<?php echo $index; ?>][cor_gradiente]" value="<?php echo htmlspecialchars($especialidade['cor_gradiente'] ?? '#ffffff'); ?>">
                                  </div>
                               </div>
-                              <div class="preview-container">
+
+                              <div class="form-row">
                                  <div class="form-group">
-                                    <label>Preview:</label>
-                                    <div class="preview-card" style="background-color: <?php echo $especialidade['cor_fundo'] === 'transparent' ? 'transparent' : htmlspecialchars($especialidade['cor_fundo']); ?>; <?php echo $especialidade['usar_blur'] ? 'backdrop-filter: blur(10px);' : ''; ?>;">
-                                       <i class="<?php echo htmlspecialchars($especialidade['icone']); ?>" style="<?php echo $especialidade['usar_gradiente'] ? 'background: linear-gradient(45deg, ' . htmlspecialchars($especialidade['cor_icone']) . ', ' . htmlspecialchars($especialidade['cor_gradiente']) . '); -webkit-background-clip: text; -webkit-text-fill-color: transparent;' : 'color: ' . htmlspecialchars($especialidade['cor_icone']) . ';'; ?>"></i>
-                                       <h4><?php echo htmlspecialchars($especialidade['titulo']); ?></h4>
-                                       <p><?php echo htmlspecialchars(substr($especialidade['descricao'], 0, 80)) . '...'; ?></p>
+                                    <label for="cor_fundo_<?php echo $index; ?>">Cor de Fundo:</label>
+                                    <input type="color" id="cor_fundo_<?php echo $index; ?>" name="especialidades[<?php echo $index; ?>][cor_fundo]" value="<?php echo htmlspecialchars($especialidade['cor_fundo'] ?? '#ffffff'); ?>">
+                                 </div>
+
+                                 <div class="form-group">
+                                    <div class="gradient-toggle">
+                                       <label>
+                                          <input type="checkbox" name="especialidades[<?php echo $index; ?>][usar_gradiente]" <?php echo !empty($especialidade['usar_gradiente']) ? 'checked' : ''; ?> onchange="toggleGradiente(this)">
+                                          Usar Gradiente
+                                       </label>
                                     </div>
                                  </div>
                               </div>
-                           </div>
-                        </div>
-                     <?php endforeach; ?>
-                  </div>
 
-                  <div class="btn-group">
-                     <button type="button" class="btn btn-secondary" onclick="adicionarEspecialidade()">Adicionar Especialidade</button>
-                     <button type="submit" class="btn">Salvar Alterações</button>
-                     <a href="editar_site.php" class="btn btn-secondary">Voltar ao Editar Site</a>
-                  </div>
-               </form>
+                              <div class="form-group">
+                                 <label for="descricao_<?php echo $index; ?>">Descrição:</label>
+                                 <textarea id="descricao_<?php echo $index; ?>" name="especialidades[<?php echo $index; ?>][descricao]" rows="4" required><?php echo htmlspecialchars($especialidade['descricao']); ?></textarea>
+                              </div>
+
+                              <div class="preview-container">
+                                 <h4>Preview:</h4>
+                                 <div class="preview-card" id="preview_<?php echo $index; ?>">
+                                    <i class="<?php echo htmlspecialchars($especialidade['icone']); ?>"></i>
+                                    <h4><?php echo htmlspecialchars($especialidade['titulo']); ?></h4>
+                                    <p><?php echo htmlspecialchars($especialidade['descricao']); ?></p>
+                                 </div>
+                              </div>
+
+                              <button type="button" class="remove-especialidade" onclick="removerEspecialidade(this)">Remover Especialidade</button>
+                           </div>
+                        <?php endforeach; ?>
+                     </div>
+
+                     <button type="button" class="add-btn" onclick="adicionarEspecialidade()">Adicionar Especialidade</button>
+
+                     <div class="btn-group">
+                        <button type="submit" class="btn">Salvar Especialidades</button>
+                        <a href="painel.php" class="btn btn-secondary">Voltar ao Painel</a>
+                     </div>
+                  </form>
+               </div>
             </div>
          </div>
       </div>
@@ -551,6 +558,33 @@ $error = $_GET['error'] ?? '';
          });
       }
       window.addEventListener('DOMContentLoaded', initVanillaPicker);
+
+      function toggleSidebar() {
+         const sidebar = document.querySelector('.sidebar');
+         sidebar.classList.toggle('open');
+      }
+
+      // Fechar sidebar ao clicar fora dela em mobile
+      document.addEventListener('click', function(e) {
+         const sidebar = document.querySelector('.sidebar');
+         const mobileBtn = document.querySelector('.mobile-menu-btn');
+
+         if (window.innerWidth <= 768 &&
+            sidebar.classList.contains('open') &&
+            !sidebar.contains(e.target) &&
+            !mobileBtn.contains(e.target)) {
+            sidebar.classList.remove('open');
+         }
+      });
+
+      // Fechar sidebar ao clicar em links do menu em mobile
+      document.querySelectorAll('.menu-item').forEach(link => {
+         link.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+               document.querySelector('.sidebar').classList.remove('open');
+            }
+         });
+      });
    </script>
 </body>
 

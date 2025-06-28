@@ -143,67 +143,61 @@ $error = $_GET['error'] ?? '';
 
       <!-- Conteúdo Principal -->
       <div class="main-content">
+         <!-- Botão mobile para menu -->
+         <div class="mobile-menu-btn" onclick="toggleSidebar()">
+            <i class="fas fa-bars"></i>
+         </div>
+
          <div class="content-header">
-            <h2>Editar Informações do Site</h2>
+            <h2>Editar Site</h2>
          </div>
 
          <div class="content-container">
-            <?php if ($error): ?><div class="error-message"><?php echo htmlspecialchars($error); ?></div><?php endif; ?>
-            <?php if ($success): ?><div class="success-message"><?php echo htmlspecialchars($success); ?></div><?php endif; ?>
-
             <div class="container">
-               <div class="submenu-tabs">
-                  <a href="#site-info" class="tab-link active" onclick="showTab('site-info')">Informações do Site</a>
-                  <a href="#especialidades" class="tab-link" onclick="showTab('especialidades')">Especialidades</a>
-               </div>
+               <div class="form-card">
+                  <h2>🌐 Editar Informações do Site</h2>
 
-               <div id="site-info" class="tab-content active">
-                  <form action="salvar_site.php" method="POST" enctype="multipart/form-data">
+                  <?php if (isset($_GET['error'])): ?>
+                     <div class="error-message">
+                        <?php echo htmlspecialchars($_GET['error']); ?>
+                     </div>
+                  <?php endif; ?>
+
+                  <?php if (isset($_GET['success'])): ?>
+                     <div class="success-message">
+                        <?php echo htmlspecialchars($_GET['success']); ?>
+                     </div>
+                  <?php endif; ?>
+
+                  <form action="salvar_site.php" method="POST">
                      <div class="form-group">
                         <label for="titulo">Título do Site:</label>
-                        <input type="text" id="titulo" name="titulo" value="<?php echo htmlspecialchars($config_site['titulo'] ?? ''); ?>" required>
+                        <input type="text" id="titulo" name="titulo" value="<?php echo htmlspecialchars($config_site['titulo']); ?>" required>
                      </div>
 
                      <div class="form-group">
-                        <label for="logomarca">Logomarca (atual: <?php echo $config_site['logomarca'] ? htmlspecialchars($config_site['logomarca']) : 'Nenhuma'; ?>):</label>
-                        <?php if (!empty($config_site['logomarca'])): ?>
-                           <img src="<?php echo htmlspecialchars($config_site['logomarca']); ?>" alt="Logomarca atual" class="img-preview">
-                        <?php endif; ?>
-                        <input type="file" id="logomarca" name="logomarca" accept="image/*">
-                        <div class="info">Deixe em branco para manter a logomarca atual</div>
+                        <label for="logomarca">URL da Logomarca:</label>
+                        <input type="url" id="logomarca" name="logomarca" value="<?php echo htmlspecialchars($config_site['logomarca']); ?>" required>
+                        <small>Ex: imgs/logo.png</small>
                      </div>
 
                      <div class="form-group">
-                        <label for="sobre_titulo">Título da Seção "Sobre Mim":</label>
-                        <input type="text" id="sobre_titulo" name="sobre_titulo" value="<?php echo htmlspecialchars($config_site['sobre_titulo'] ?? 'Sobre Mim'); ?>" required>
+                        <label for="sobre_titulo">Título da Seção Sobre:</label>
+                        <input type="text" id="sobre_titulo" name="sobre_titulo" value="<?php echo htmlspecialchars($config_site['sobre_titulo'] ?? 'Sobre <span>Mim</span>'); ?>">
+                        <small>Use &lt;span&gt;texto&lt;/span&gt; para destacar palavras</small>
                      </div>
 
                      <div class="form-group">
-                        <label for="sobre_conteudo">Conteúdo da Seção "Sobre Mim":</label>
-                        <textarea id="sobre_conteudo" name="sobre_conteudo" required><?php echo htmlspecialchars($config_site['sobre_conteudo'] ?? ''); ?></textarea>
-                     </div>
-
-                     <div class="form-group">
-                        <label>Menu do Site:</label>
-                        <div id="menu-list" class="menu-list">
-                           <!-- Itens do menu serão adicionados via JavaScript -->
-                        </div>
-                        <button type="button" class="add-btn" onclick="addMenuItem()">Adicionar Item do Menu</button>
+                        <label for="sobre_conteudo">Conteúdo da Seção Sobre:</label>
+                        <textarea id="sobre_conteudo" name="sobre_conteudo" rows="6" required><?php echo htmlspecialchars($config_site['sobre_conteudo'] ?? ''); ?></textarea>
                      </div>
 
                      <div class="btn-group">
                         <button type="submit" class="btn">Salvar Alterações</button>
-                        <a href="painel.php" class="btn btn-secondary">Cancelar</a>
+                        <a href="index.php" target="_blank" class="btn btn-secondary">Ver Site</a>
+                        <a href="painel.php" class="btn btn-secondary">Voltar ao Painel</a>
                      </div>
                   </form>
-               </div>
-
-               <div id="especialidades" class="tab-content">
-                  <div class="especialidades-info">
-                     <h3>Gerenciar Especialidades</h3>
-                     <p>Personalize os ícones, cores e conteúdo das suas especialidades profissionais.</p>
-                     <a href="gerenciar_especialidades.php" class="btn btn-secondary">Abrir Gerenciador de Especialidades</a>
-                  </div>
                </div>
             </div>
          </div>
@@ -211,43 +205,32 @@ $error = $_GET['error'] ?? '';
    </div>
 
    <script>
-      ClassicEditor
-         .create(document.querySelector('#sobre_conteudo'), {
-            toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote', 'insertTable', 'undo', 'redo']
-         })
-         .catch(error => {
-            console.error(error);
-         });
-
-      function addMenuItem(nome = '', link = '') {
-         const list = document.getElementById('menu-list');
-         const div = document.createElement('div');
-         div.className = 'menu-item';
-         div.innerHTML = `<input type="text" name="menu_nome[]" placeholder="Nome" value="${nome}" required> <input type="text" name="menu_link[]" placeholder="Link" value="${link}" required> <button type="button" class="remove-btn" onclick="this.parentNode.remove()">Remover</button>`;
-         list.appendChild(div);
+      function toggleSidebar() {
+         const sidebar = document.querySelector('.sidebar');
+         sidebar.classList.toggle('open');
       }
 
-      function initMenu() {
-         const menu = <?php echo json_encode($config_site['menu']); ?>;
-         if (menu.length === 0) addMenuItem();
-         else menu.forEach(item => addMenuItem(item.nome, item.link));
-      }
+      // Fechar sidebar ao clicar fora dela em mobile
+      document.addEventListener('click', function(e) {
+         const sidebar = document.querySelector('.sidebar');
+         const mobileBtn = document.querySelector('.mobile-menu-btn');
 
-      function showTab(tabName) {
-         // Esconde todas as abas
-         document.querySelectorAll('.tab-content').forEach(tab => {
-            tab.classList.remove('active');
+         if (window.innerWidth <= 768 &&
+            sidebar.classList.contains('open') &&
+            !sidebar.contains(e.target) &&
+            !mobileBtn.contains(e.target)) {
+            sidebar.classList.remove('open');
+         }
+      });
+
+      // Fechar sidebar ao clicar em links do menu em mobile
+      document.querySelectorAll('.menu-item').forEach(link => {
+         link.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+               document.querySelector('.sidebar').classList.remove('open');
+            }
          });
-         document.querySelectorAll('.tab-link').forEach(link => {
-            link.classList.remove('active');
-         });
-
-         // Mostra a aba selecionada
-         document.getElementById(tabName).classList.add('active');
-         event.target.classList.add('active');
-      }
-
-      window.onload = initMenu;
+      });
    </script>
 </body>
 

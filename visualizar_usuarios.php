@@ -219,8 +219,13 @@ $config['menus'] = $novo_menus;
 
       <!-- Conteúdo Principal -->
       <div class="main-content">
+         <!-- Botão mobile para menu -->
+         <div class="mobile-menu-btn" onclick="toggleSidebar()">
+            <i class="fas fa-bars"></i>
+         </div>
+
          <div class="content-header">
-            <h2>Visualizar Usuários</h2>
+            <h2>👥 Gerenciar Usuários</h2>
          </div>
 
          <div class="content-container">
@@ -246,39 +251,37 @@ $config['menus'] = $novo_menus;
                            <thead>
                               <tr>
                                  <th>Avatar</th>
-                                 <th>Usuário</th>
                                  <th>Nome</th>
-                                 <th>E-mail</th>
-                                 <th>Data de Criação</th>
+                                 <th>Usuário</th>
+                                 <th>Email</th>
                                  <th>Último Login</th>
                                  <th>Ações</th>
                               </tr>
                            </thead>
                            <tbody>
-                              <?php foreach ($usuarios as $usuario => $dados): ?>
+                              <?php foreach ($usuarios as $index => $usuario): ?>
                                  <tr>
                                     <td>
                                        <div class="user-avatar">
-                                          <?php echo strtoupper(substr($dados['nome'], 0, 1)); ?>
+                                          <img src="imgs/img_perfil.jpeg" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;">
                                        </div>
                                     </td>
-                                    <td><strong><?php echo htmlspecialchars($usuario); ?></strong></td>
-                                    <td><?php echo htmlspecialchars($dados['nome']); ?></td>
-                                    <td><?php echo htmlspecialchars($dados['email']); ?></td>
-                                    <td><?php echo date('d/m/Y H:i', strtotime($dados['data_criacao'])); ?></td>
-                                    <td><?php echo isset($dados['ultimo_login']) ? date('d/m/Y H:i', strtotime($dados['ultimo_login'])) : '<span style=\'color:#aaa\'>Nunca</span>'; ?></td>
+                                    <td><?php echo htmlspecialchars($usuario['nome']); ?></td>
+                                    <td><?php echo htmlspecialchars($usuario['usuario']); ?></td>
+                                    <td><?php echo htmlspecialchars($usuario['email']); ?></td>
+                                    <td><?php echo htmlspecialchars($usuario['ultimo_login'] ?? 'Nunca'); ?></td>
                                     <td>
                                        <div class="acoes-btns">
-                                          <a href="editar_usuario.php?usuario=<?php echo urlencode($usuario); ?>" class="btn btn-secondary">Editar</a>
-                                          <?php if ($usuario !== $_SESSION['usuario']): ?>
-                                             <a href="excluir_usuario.php?usuario=<?php echo urlencode($usuario); ?>" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este usuário?')">Excluir</a>
-                                             <form method="post" action="desconectar_usuario.php" style="display:inline;">
-                                                <input type="hidden" name="usuario" value="<?php echo htmlspecialchars($usuario); ?>">
-                                                <button type="submit" class="btn btn-roxo">Desconectar</button>
-                                             </form>
-                                          <?php else: ?>
-                                             <span style="color: #666; font-size: 0.9rem;">Usuário Atual</span>
-                                          <?php endif; ?>
+                                          <a href="editar_usuario.php?id=<?php echo $index; ?>" class="btn btn-secondary">
+                                             <i class="fas fa-edit"></i> Editar
+                                          </a>
+                                          <a href="excluir_usuario.php?id=<?php echo $index; ?>" class="btn btn-danger"
+                                             onclick="return confirm('Tem certeza que deseja excluir este usuário?')">
+                                             <i class="fas fa-trash"></i> Excluir
+                                          </a>
+                                          <a href="desconectar_usuario.php?id=<?php echo $index; ?>" class="btn btn-roxo">
+                                             <i class="fas fa-sign-out-alt"></i> Desconectar
+                                          </a>
                                        </div>
                                     </td>
                                  </tr>
@@ -297,6 +300,35 @@ $config['menus'] = $novo_menus;
          </div>
       </div>
    </div>
+
+   <script>
+      function toggleSidebar() {
+         const sidebar = document.querySelector('.sidebar');
+         sidebar.classList.toggle('open');
+      }
+
+      // Fechar sidebar ao clicar fora dela em mobile
+      document.addEventListener('click', function(e) {
+         const sidebar = document.querySelector('.sidebar');
+         const mobileBtn = document.querySelector('.mobile-menu-btn');
+
+         if (window.innerWidth <= 768 &&
+            sidebar.classList.contains('open') &&
+            !sidebar.contains(e.target) &&
+            !mobileBtn.contains(e.target)) {
+            sidebar.classList.remove('open');
+         }
+      });
+
+      // Fechar sidebar ao clicar em links do menu em mobile
+      document.querySelectorAll('.menu-item').forEach(link => {
+         link.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+               document.querySelector('.sidebar').classList.remove('open');
+            }
+         });
+      });
+   </script>
 </body>
 
 </html>

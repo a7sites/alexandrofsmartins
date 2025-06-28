@@ -122,130 +122,103 @@ $config['menus'] = $novo_menus;
       </div>
       <!-- Conteúdo Principal -->
       <div class="main-content">
+         <!-- Botão mobile para menu -->
+         <div class="mobile-menu-btn" onclick="toggleSidebar()">
+            <i class="fas fa-bars"></i>
+         </div>
+
          <div class="content-header">
             <h2>Configurações do Painel</h2>
          </div>
+
          <div class="content-container">
             <div class="container">
-               <?php if ($error): ?><div class="error-message"><?php echo htmlspecialchars($error); ?></div><?php endif; ?>
-               <?php if ($success): ?><div class="success-message"><?php echo htmlspecialchars($success); ?></div><?php endif; ?>
-               <form action="salvar_configuracoes.php" method="POST" id="configForm">
-                  <div class="form-section">
-                     <h3>Título do Painel</h3>
-                     <input type="text" name="titulo" value="<?php echo htmlspecialchars($config['titulo']); ?>" required>
-                  </div>
-                  <div class="form-section">
-                     <h3>Cor de Fundo da Barra Lateral</h3>
-                     <input type="color" name="sidebar_color" value="<?php echo htmlspecialchars($sidebar_color); ?>">
-                  </div>
-                  <div class="form-section">
-                     <h3>Menus do Painel</h3>
-                     <div class="form-row-4">
-                        <?php foreach ($config['menus'] as $i => $menu): if ($menu['id'] === 'sair') continue; ?>
-                           <div class="form-group">
-                              <label>Nome do Menu:</label>
-                              <input type="text" name="menus[<?php echo $i; ?>][nome]" value="<?php echo htmlspecialchars($menu['nome']); ?>">
-                              <label>Ícone:</label>
-                              <div class="icon-selector">
-                                 <div class="icon-preview" onclick="abrirPopupIconeMenu(this)">
-                                    <i class="<?php echo htmlspecialchars($menu['icone']); ?>"></i>
-                                    <span><?php echo htmlspecialchars($menu['icone']); ?></span>
-                                 </div>
-                                 <input type="text" class="icon-input" name="menus[<?php echo $i; ?>][icone]" value="<?php echo htmlspecialchars($menu['icone']); ?>" readonly>
-                                 <div class="icon-popup">
-                                    <div class="icon-grid"></div>
-                                 </div>
-                              </div>
-                              <input type="hidden" name="menus[<?php echo $i; ?>][id]" value="<?php echo htmlspecialchars($menu['id']); ?>">
-                              <small>Ex: fas fa-user, fas fa-cog...</small>
-                           </div>
-                        <?php endforeach; ?>
+               <div class="form-card">
+                  <h2>⚙️ Configurações do Sistema</h2>
+
+                  <?php if (isset($_GET['error'])): ?>
+                     <div class="error-message">
+                        <?php echo htmlspecialchars($_GET['error']); ?>
                      </div>
-                  </div>
-                  <div class="form-section">
-                     <h3>Modo da Barra Lateral</h3>
-                     <label><input type="checkbox" name="shrink_sidebar" value="1" <?php echo !empty($config['shrink_sidebar']) ? 'checked' : ''; ?>> Encolher barra lateral (mostrar só ícones)</label>
-                  </div>
-                  <div class="form-section">
-                     <h3>Timezone do Painel</h3>
-                     <select name="timezone">
-                        <?php foreach ($timezones as $tz): ?>
-                           <option value="<?php echo $tz; ?>" <?php echo $config['timezone'] === $tz ? 'selected' : ''; ?>><?php echo $tz; ?></option>
-                        <?php endforeach; ?>
-                     </select>
-                  </div>
-                  <div class="btn-group">
-                     <button type="submit" class="btn">Salvar Configurações</button>
-                     <a href="painel.php" class="btn btn-secondary">Voltar ao Painel</a>
-                  </div>
-               </form>
+                  <?php endif; ?>
+
+                  <?php if (isset($_GET['success'])): ?>
+                     <div class="success-message">
+                        <?php echo htmlspecialchars($_GET['success']); ?>
+                     </div>
+                  <?php endif; ?>
+
+                  <form action="salvar_configuracoes.php" method="POST">
+                     <div class="form-group">
+                        <label for="titulo">Título do Painel:</label>
+                        <input type="text" id="titulo" name="titulo" value="<?php echo htmlspecialchars($config['titulo']); ?>" required>
+                     </div>
+
+                     <div class="form-group">
+                        <label for="sidebar_color">Cor da Barra Lateral:</label>
+                        <input type="color" id="sidebar_color" name="sidebar_color" value="<?php echo htmlspecialchars($config['sidebar_color']); ?>">
+                     </div>
+
+                     <div class="form-group">
+                        <label for="timezone">Fuso Horário:</label>
+                        <select id="timezone" name="timezone">
+                           <option value="America/Sao_Paulo" <?php echo $config['timezone'] === 'America/Sao_Paulo' ? 'selected' : ''; ?>>Brasília (GMT-3)</option>
+                           <option value="America/Manaus" <?php echo $config['timezone'] === 'America/Manaus' ? 'selected' : ''; ?>>Manaus (GMT-4)</option>
+                           <option value="America/Belem" <?php echo $config['timezone'] === 'America/Belem' ? 'selected' : ''; ?>>Belém (GMT-3)</option>
+                           <option value="America/Fortaleza" <?php echo $config['timezone'] === 'America/Fortaleza' ? 'selected' : ''; ?>>Fortaleza (GMT-3)</option>
+                           <option value="America/Recife" <?php echo $config['timezone'] === 'America/Recife' ? 'selected' : ''; ?>>Recife (GMT-3)</option>
+                           <option value="America/Salvador" <?php echo $config['timezone'] === 'America/Salvador' ? 'selected' : ''; ?>>Salvador (GMT-3)</option>
+                           <option value="America/Maceio" <?php echo $config['timezone'] === 'America/Maceio' ? 'selected' : ''; ?>>Maceió (GMT-3)</option>
+                           <option value="America/Aracaju" <?php echo $config['timezone'] === 'America/Aracaju' ? 'selected' : ''; ?>>Aracaju (GMT-3)</option>
+                           <option value="America/Noronha" <?php echo $config['timezone'] === 'America/Noronha' ? 'selected' : ''; ?>>Fernando de Noronha (GMT-2)</option>
+                        </select>
+                     </div>
+
+                     <div class="form-group">
+                        <label>
+                           <input type="checkbox" name="shrink_sidebar" <?php echo $config['shrink_sidebar'] ? 'checked' : ''; ?>>
+                           Modo Encolhido da Barra Lateral
+                        </label>
+                     </div>
+
+                     <div class="btn-group">
+                        <button type="submit" class="btn">Salvar Configurações</button>
+                        <a href="painel.php" class="btn btn-secondary">Voltar ao Painel</a>
+                     </div>
+                  </form>
+               </div>
             </div>
          </div>
       </div>
    </div>
-   <script src="https://cdn.jsdelivr.net/npm/vanilla-picker@2.11.1/dist/vanilla-picker.min.js"></script>
+
    <script>
-      // Lista de ícones Bootstrap populares
-      const iconesBootstrap = [
-         'bi-code-slash', 'bi-pencil-square', 'bi-wordpress', 'bi-palette', 'bi-laptop', 'bi-phone',
-         'bi-gear', 'bi-star', 'bi-heart', 'bi-lightning', 'bi-fire', 'bi-rocket', 'bi-award',
-         'bi-trophy', 'bi-gem', 'bi-diamond', 'bi-cpu', 'bi-motherboard', 'bi-display', 'bi-tablet',
-         'bi-window', 'bi-browser-chrome', 'bi-browser-safari', 'bi-browser-edge', 'bi-browser-firefox',
-         'bi-arrow-up-circle', 'bi-arrow-down-circle', 'bi-arrow-left-circle', 'bi-arrow-right-circle',
-         'bi-check-circle', 'bi-x-circle', 'bi-exclamation-circle', 'bi-question-circle', 'bi-info-circle',
-         'bi-plus-circle', 'bi-dash-circle', 'bi-x-lg', 'bi-plus-lg', 'bi-dash-lg', 'bi-asterisk',
-         'bi-hash', 'bi-percent', 'bi-currency-dollar', 'bi-currency-euro', 'bi-currency-pound',
-         'bi-currency-yen', 'bi-currency-bitcoin', 'bi-bank', 'bi-cash', 'bi-credit-card', 'bi-wallet',
-         'bi-bag', 'bi-cart', 'bi-shop', 'bi-tag', 'bi-tags', 'bi-receipt', 'bi-receipt-cutoff',
-         'bi-gift', 'bi-box', 'bi-box-seam', 'bi-box-arrow-up', 'bi-box-arrow-down', 'bi-box-arrow-left',
-         'bi-box-arrow-right', 'bi-archive', 'bi-archive-fill', 'bi-inbox', 'bi-inbox-fill', 'bi-folder',
-         'bi-folder-fill', 'bi-folder-plus', 'bi-folder-minus', 'bi-folder-x', 'bi-folder-check',
-         'bi-file-earmark', 'bi-file-earmark-text', 'bi-file-earmark-image', 'bi-file-earmark-pdf',
-         'bi-file-earmark-word', 'bi-file-earmark-excel', 'bi-file-earmark-powerpoint', 'bi-file-earmark-zip',
-         'bi-file-earmark-music', 'bi-file-earmark-video', 'bi-file-earmark-code', 'bi-file-earmark-binary',
-         'bi-file-earmark-break', 'bi-file-earmark-check', 'bi-file-earmark-minus', 'bi-file-earmark-plus',
-         'bi-file-earmark-x', 'bi-file-earmark-ruled', 'bi-file-earmark-slides', 'bi-file-earmark-spreadsheet',
-         'bi-file-earmark-person', 'bi-file-earmark-lock', 'bi-file-earmark-lock2', 'bi-file-earmark-shield',
-         'bi-file-earmark-medical', 'bi-file-earmark-diff', 'bi-file-earmark-arrow-up', 'bi-file-earmark-arrow-down',
-         'bi-file-earmark-arrow-left', 'bi-file-earmark-arrow-right', 'bi-file-earmark-bar-graph',
-         'bi-file-earmark-easel', 'bi-file-earmark-font', 'bi-file-earmark-image', 'bi-file-earmark-lock2',
-         'bi-file-earmark-medical', 'bi-file-earmark-minus', 'bi-file-earmark-music', 'bi-file-earmark-person',
-         'bi-file-earmark-play', 'bi-file-earmark-plus', 'bi-file-earmark-post', 'bi-file-earmark-richtext',
-         'bi-file-earmark-ruled', 'bi-file-earmark-slides', 'bi-file-earmark-spreadsheet', 'bi-file-earmark-text',
-         'bi-file-earmark-word', 'bi-file-earmark-x', 'bi-file-earmark-zip', 'bi-file-earmark', 'bi-file',
-         'bi-file-arrow-down', 'bi-file-arrow-up', 'bi-file-bar-graph', 'bi-file-binary', 'bi-file-break',
-         'bi-file-check', 'bi-file-code', 'bi-file-diff', 'bi-file-earmark', 'bi-file-easel', 'bi-file-font',
-         'bi-file-image', 'bi-file-lock', 'bi-file-lock2', 'bi-file-medical', 'bi-file-minus', 'bi-file-music',
-         'bi-file-person', 'bi-file-play', 'bi-file-plus', 'bi-file-post', 'bi-file-richtext', 'bi-file-ruled',
-         'bi-file-slides', 'bi-file-spreadsheet', 'bi-file-text', 'bi-file-word', 'bi-file-x', 'bi-file-zip'
-      ];
-
-      function abrirPopupIconeMenu(elemento) {
-         const popup = elemento.nextElementSibling.nextElementSibling;
-         const grid = popup.querySelector('.icon-grid');
-         grid.innerHTML = '';
-         iconesBootstrap.forEach(icone => {
-            const div = document.createElement('div');
-            div.className = 'icon-option';
-            div.innerHTML = `<i class="${icone}"></i>`;
-            div.onclick = () => selecionarIconeMenu(elemento, icone);
-            grid.appendChild(div);
-         });
-         popup.classList.toggle('show');
-         document.querySelectorAll('.icon-popup').forEach(p => {
-            if (p !== popup) p.classList.remove('show');
-         });
+      function toggleSidebar() {
+         const sidebar = document.querySelector('.sidebar');
+         sidebar.classList.toggle('open');
       }
 
-      function selecionarIconeMenu(elemento, icone) {
-         const preview = elemento.querySelector('i');
-         const span = elemento.querySelector('span');
-         const input = elemento.parentNode.querySelector('.icon-input');
-         preview.className = icone;
-         span.textContent = icone;
-         input.value = icone;
-         elemento.nextElementSibling.nextElementSibling.classList.remove('show');
-      }
+      // Fechar sidebar ao clicar fora dela em mobile
+      document.addEventListener('click', function(e) {
+         const sidebar = document.querySelector('.sidebar');
+         const mobileBtn = document.querySelector('.mobile-menu-btn');
+
+         if (window.innerWidth <= 768 &&
+            sidebar.classList.contains('open') &&
+            !sidebar.contains(e.target) &&
+            !mobileBtn.contains(e.target)) {
+            sidebar.classList.remove('open');
+         }
+      });
+
+      // Fechar sidebar ao clicar em links do menu em mobile
+      document.querySelectorAll('.menu-item').forEach(link => {
+         link.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+               document.querySelector('.sidebar').classList.remove('open');
+            }
+         });
+      });
    </script>
 </body>
 
