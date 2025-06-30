@@ -4,13 +4,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Administrativo - Login</title>
+    <title>Painel Administrativo - Login A7 Sites</title>
     <link rel="stylesheet" href="css/painel.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body,
+        input,
+        button,
+        select,
+        textarea {
+            font-family: 'Josefin Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+            font-weight: 200;
+        }
+
+        body.login-bg {
+            background: url('../imgs/bg.painel.jpg') no-repeat center center fixed !important;
+            background-size: cover !important;
+            min-height: 100vh;
+        }
+
+        .login-logo-box .desc {
+            color: #fff !important;
+            font-weight: 200;
+        }
+
+        .login-box {
+            background: #310248 !important;
+            border: 2px solid rgba(255, 255, 255, 0.35) !important;
+            box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.12) !important;
+        }
+
+        .login-box h2 {
+            color: #fff !important;
+        }
+
+        .login-box input[type="text"],
+        .login-box input[type="password"] {
+            background: rgba(255, 255, 255, 0.19) !important;
+            backdrop-filter: blur(5px) !important;
+            color: #fff !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        }
+
+        .login-box input[type="text"]::placeholder,
+        .login-box input[type="password"]::placeholder {
+            color: #fff !important;
+            opacity: 0.7;
+        }
+
+        .login-box .input-group .toggle-password i {
+            color: #fff !important;
+        }
+    </style>
 </head>
 
 <body class="login-bg">
-    <div class="login-container">
+    <div class="login-container" style="background:rgba(255, 255, 255, 0.11); backdrop-filter: blur(5px);">
         <div class="login-main">
             <div class="login-logo-box">
                 <img src="imgs/a7site.svg" alt="Logo A7 Sites">
