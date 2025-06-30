@@ -20,6 +20,11 @@
             "icone": "fas fa-phone"
         },
         {
+            "id": "arquivos",
+            "nome": "Arquivos",
+            "icone": "fas fa-photo-film"
+        },
+        {
             "id": "editar_site",
             "nome": "Editar Site",
             "icone": "fas fa-edit"
