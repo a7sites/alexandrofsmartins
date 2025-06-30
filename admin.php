@@ -63,7 +63,7 @@
     <div class="login-container" style="background:rgba(255, 255, 255, 0.11); backdrop-filter: blur(5px);">
         <div class="login-main">
             <div class="login-logo-box">
-                <img src="imgs/a7site.svg" alt="Logo A7 Sites">
+                <img src="imgs/logo.painel.svg" alt="Logo A7 Sites">
                 <div class="desc">
                     Somos uma Empresa de criação de sites que é referência nacional!<br>
                     Faça seu site responsivo conosco e conquiste seu sucesso online!
