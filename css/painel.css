@@ -3,11 +3,13 @@
    margin: 0;
    padding: 0;
    box-sizing: border-box;
+   font-family: 'Josefin Sans', sans-serif !important;
 }
-body {
-
-   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-   color: #333;
+body, input, button, select, textarea,
+.sidebar, .sidebar-menu, .menu-item, .sidebar-header h1, .menu-item.active,
+.main-content, .content-header, .content-container, h1, h2, h3, h4, h5, h6, p, a, label, span, div {
+   font-family: 'Josefin Sans', 'Segoe UI', sans-serif;
+   font-weight: 300;
 }
 
 /* Layout com Menu Lateral */
@@ -1035,4 +1037,9 @@ body.login-bg {
     max-width: 98vw;
     padding: 16px 2vw;
   }
+}
+
+.sidebar, .sidebar-menu, .menu-item, .sidebar-header h1, .menu-item.active {
+   font-family: 'Josefin Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+   font-weight: 300 !important;
 } 

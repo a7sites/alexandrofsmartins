@@ -4,7 +4,8 @@
         "nome": "Administrador",
         "email": "admin@exemplo.com",
         "data_criacao": "2024-01-01 00:00:00",
-        "criado_por": "sistema"
+        "criado_por": "sistema",
+        "ultimo_login": "2025-06-30 12:40:03"
     },
     "admin2": {
         "senha": "$2y$10$5OlBaQCaOZZfp.aQCg8XW.\/GhnOBLqJeuQX7ezshZLpZmPzCzGSrC",

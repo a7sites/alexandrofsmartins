@@ -67,6 +67,8 @@ foreach ($menus as $menu) {
    }
 }
 $config['menus'] = $novo_menus;
+
+define('MENU_ATIVO', 'usuarios');
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -82,51 +84,7 @@ $config['menus'] = $novo_menus;
 <body>
    <div class="admin-layout">
       <!-- Menu Lateral -->
-      <div class="sidebar<?php echo !empty($config['shrink_sidebar']) ? ' shrink' : ''; ?>" style="background: <?php echo htmlspecialchars($config['sidebar_color']); ?>;">
-         <div class="sidebar-header">
-            <div class="profile-section">
-               <div class="profile-photo">
-                  <img src="<?php echo htmlspecialchars($perfil['foto_perfil']); ?>" alt="Foto de Perfil" id="profile-photo">
-               </div>
-               <h1><?php echo htmlspecialchars($config['titulo']); ?></h1>
-            </div>
-         </div>
-         <div class="sidebar-menu">
-            <?php foreach ($config['menus'] as $menu): if ($menu['id'] === 'sair') continue; ?>
-               <a href="<?php
-                        switch ($menu['id']) {
-                           case 'dashboard':
-                              echo 'painel.php';
-                              break;
-                           case 'perfil':
-                              echo 'meu_perfil.php';
-                              break;
-                           case 'editar_site':
-                              echo 'editar_site.php';
-                              break;
-                           case 'cadastrar':
-                              echo 'cadastrar.php';
-                              break;
-                           case 'usuarios':
-                              echo 'visualizar_usuarios.php';
-                              break;
-                           case 'registros':
-                              echo 'registros.php';
-                              break;
-                           case 'ver_site':
-                              echo 'index.php';
-                              break;
-                           case 'configuracoes':
-                              echo 'configuracoes.php';
-                              break;
-                        } ?>" class="menu-item<?php echo $menu['id'] === 'usuarios' ? ' active' : ''; ?>">
-                  <i class="<?php echo htmlspecialchars($menu['icone']); ?>"></i>
-                  <span><?php echo htmlspecialchars($menu['nome']); ?></span>
-               </a>
-            <?php endforeach; ?>
-            <a href="logout.php" class="menu-item"><i class="fas fa-sign-out-alt"></i> <span>Sair</span></a>
-         </div>
-      </div>
+      <?php include 'src/sidebar.php'; ?>
 
       <!-- Conteúdo Principal -->
       <div class="main-content">

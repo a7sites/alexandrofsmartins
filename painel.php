@@ -46,19 +46,25 @@ foreach ($menus as $menu) {
    if ($menu['id'] === 'dashboard') $novo_menus[] = $menu;
    if ($menu['id'] === 'perfil') {
       $novo_menus[] = $menu;
-      // Após perfil, inserir registros
       foreach ($menus as $m2) {
-         if ($m2['id'] === 'registros') $novo_menus[] = $m2;
+         if ($m2['id'] === 'registros') {
+            $novo_menus[] = $m2;
+            // Adiciona Arquivos logo após Registros
+            foreach ($menus as $m3) {
+               if ($m3['id'] === 'arquivos') $novo_menus[] = $m3;
+            }
+         }
       }
    }
 }
-// Adiciona os demais menus (exceto registros, já inserido)
 foreach ($menus as $menu) {
-   if ($menu['id'] !== 'dashboard' && $menu['id'] !== 'perfil' && $menu['id'] !== 'registros' && $menu['id'] !== 'sair') {
+   if ($menu['id'] !== 'dashboard' && $menu['id'] !== 'perfil' && $menu['id'] !== 'registros' && $menu['id'] !== 'arquivos' && $menu['id'] !== 'sair') {
       $novo_menus[] = $menu;
    }
 }
 $config['menus'] = $novo_menus;
+
+define('MENU_ATIVO', 'dashboard');
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -70,56 +76,13 @@ $config['menus'] = $novo_menus;
    <link rel="stylesheet" href="css/painel.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;400;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
    <div class="admin-layout">
       <!-- Menu Lateral -->
-      <div class="sidebar<?php echo !empty($config['shrink_sidebar']) ? ' shrink' : ''; ?>" style="background: <?php echo htmlspecialchars($config['sidebar_color']); ?>;">
-         <div class="sidebar-header">
-            <div class="profile-section">
-               <div class="profile-photo">
-                  <img src="imgs/img_perfil.jpeg" alt="Foto de Perfil" id="profile-photo">
-               </div>
-               <h1><?php echo htmlspecialchars($config['titulo']); ?></h1>
-            </div>
-         </div>
-         <div class="sidebar-menu">
-            <?php foreach ($config['menus'] as $menu): if ($menu['id'] === 'sair') continue; ?>
-               <a href="<?php
-                        switch ($menu['id']) {
-                           case 'dashboard':
-                              echo 'painel.php';
-                              break;
-                           case 'perfil':
-                              echo 'meu_perfil.php';
-                              break;
-                           case 'editar_site':
-                              echo 'editar_site.php';
-                              break;
-                           case 'cadastrar':
-                              echo 'cadastrar.php';
-                              break;
-                           case 'usuarios':
-                              echo 'visualizar_usuarios.php';
-                              break;
-                           case 'registros':
-                              echo 'registros.php';
-                              break;
-                           case 'ver_site':
-                              echo 'index.php';
-                              break;
-                           case 'configuracoes':
-                              echo 'configuracoes.php';
-                              break;
-                        } ?>" class="menu-item<?php echo $menu['id'] === 'dashboard' ? ' active' : ''; ?>">
-                  <i class="<?php echo htmlspecialchars($menu['icone']); ?>"></i>
-                  <span><?php echo htmlspecialchars($menu['nome']); ?></span>
-               </a>
-            <?php endforeach; ?>
-            <a href="logout.php" class="menu-item"><i class="fas fa-sign-out-alt"></i> <span>Sair</span></a>
-         </div>
-      </div>
+      <?php include 'src/sidebar.php'; ?>
 
       <!-- Conteúdo Principal -->
       <div class="main-content">
